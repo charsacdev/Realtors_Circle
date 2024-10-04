@@ -1,0 +1,46 @@
+@font-face {
+     font-family: 'Epilogue-black';
+     src: url('../fonts/static/Epilogue-Black.ttf');
+}
+
+@font-face {
+     font-family: 'Epilogue-bold';
+     src: url('../fonts/static/Epilogue-Bold.ttf');
+}
+
+@font-face {
+     font-family: 'Epilogue-xbold';
+     src: url('../fonts/static/Epilogue-ExtraBold.ttf');
+}
+
+@font-face {
+     font-family: 'Epilogue-semi-bold';
+     src: url('../fonts/static/Epilogue-SemiBold.ttf');
+}
+
+@font-face {
+     font-family: 'Epilogue-medium';
+     src: url('../fonts/static/Epilogue-Medium.ttf');
+}
+
+@font-face {
+     font-family: 'Epilogue-regular';
+     src: url('../fonts/static/Epilogue-Regular.ttf');
+}
+
+@font-face {
+     font-family: 'Epilogue-light';
+     src: url('../fonts/static/Epilogue-Light.ttf');
+}
+
+@font-face {
+     font-family: 'Epilogue-xlight';
+     src: url('../fonts/static/Epilogue-ExtraLight.ttf');
+}
+
+@font-face {
+     font-family: 'Epilogue-thin';
+     src: url('../fonts/static/Epilogue-Thin.ttf');
+}
+
+
