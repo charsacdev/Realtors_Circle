@@ -71,17 +71,17 @@
             <li class="nav-item">
               <a class="nav-link {{ Request::segment(1)==="contact" ? 'active' : '' }} getstarted-btn" href="contact">Contact Us</a>
             </li>
-            <li class="nav-item nav-bg-ml d-none">
+            <li class="nav-item nav-bg-ml d-non">
               <a href="agency-signup" class="nav-link primary-btn-outline btn-rounded">
                 Sign Up as Agency
               </a>
             </li>
-            <li class="nav-item d-none">
+            <li class="nav-item d-non">
               <a href="signup" class="nav-link primary-btn btn-rounded">
-                Sign Up as User
+                Sign Up as Realtor
               </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item d-none">
               <a href="#" data-bs-toggle="modal" data-bs-target="#contactModal" class="nav-link primary-btn btn-rounded">
                 Join WaitList
               </a>

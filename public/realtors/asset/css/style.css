@@ -2614,3 +2614,13 @@ footer#rcm-footer .socials img{
 }
 
 
+.error{
+    color: orangered;
+    font-size: 13px;
+  }
+
+  .alert{
+    text-align: center;
+  }
+
+

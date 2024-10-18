@@ -2611,3 +2611,9 @@ footer#rcm-footer .socials img{
     color: var(--black-color);
     font-family: var(--font-family-semi-bold);
 }
+
+
+.error{
+    font-size: 13px;
+    color: orangered;
+}

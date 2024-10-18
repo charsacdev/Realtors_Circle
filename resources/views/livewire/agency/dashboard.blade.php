@@ -10,7 +10,7 @@
                       <h5>Total Properties</h5>
                   </div>
                   <div class="dsb-card-body">
-                    <h4>5,000</h4>
+                    <h4>{{ number_format($propertyCount) }}</h4>
                   </div>
                 </div>
               </div>
@@ -24,7 +24,7 @@
                       </div>
                   </div>
                   <div class="dsb-card-body">
-                    <h4>5,000</h4>
+                    <h4>{{ number_format($availablePropertyCount) }}</h4>
                   </div>
                   <div class="dsb-card-footer">
                     <small><span class="primary-color">10%</span> increase compare to last month </small>

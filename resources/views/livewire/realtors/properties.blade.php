@@ -35,198 +35,34 @@
                                <th></th>
                           </thead>
                          <tbody>
-                          <tr>
-                              <td>
-                                  <div
-                                    class="d-flex align-items-center justify-content-start gap-2">
-                                    <div
-                                        class="custom-control custom-checkbox ms-2 d-inline">
-                                        <input type="checkbox"
-                                            class="custom-control-input"
-                                            id="customCheckBox2" required="">
-                                        <label class="custom-control-label"
-                                            for="customCheckBox2"></label>
+                            @if($properties)
+                            @foreach ($properties as $property)
+                                <tr>
+                                    <td>
+                                        <div
+                                        class="d-flex align-items-center justify-content-start gap-2">
+                                        <div
+                                            class="custom-control custom-checkbox ms-2 d-inline">
+                                            <input type="checkbox"
+                                                class="custom-control-input"
+                                                id="customCheckBox2" required="">
+                                            <label class="custom-control-label"
+                                                for="customCheckBox2"></label>
+                                        </div>
+                                        <div class="apt_ful">
+                                           {{ $property->name }}
+                                        </div>
                                     </div>
-                                    <div class="apt_ful">
-                                      2 Plots of Land
-                                    </div>
-                                </div>
-                               </td>
-                               <td>Abakaliki, Ebonyi State</td>
-                               <td>Nigeria</td>
-                               <td><span class="live-badge success">Available</span></td>
-                               <td>N750,000</td>
-                               <td>March 23, 2024 12:00PM </td>
-                               <td class="cursor-p" data-bs-toggle="modal" data-bs-target="#editPropertyModal"><i class="fa fa-ellipsis-h"></i></td>
-                          </tr>
-                          <tr>
-                              <td>
-                                  <div
-                                    class="d-flex align-items-center justify-content-start gap-2">
-                                    <div
-                                        class="custom-control custom-checkbox ms-2 d-inline">
-                                        <input type="checkbox"
-                                            class="custom-control-input"
-                                            id="customCheckBox2" required="">
-                                        <label class="custom-control-label"
-                                            for="customCheckBox2"></label>
-                                    </div>
-                                    <div class="apt_ful">
-                                      2 Plots of Land
-                                    </div>
-                                </div>
-                               </td>
-                               <td>Abakaliki, Ebonyi State</td>
-                               <td>Nigeria</td>
-                               <td><span class="live-badge success">Available</span></td>
-                               <td>N750,000</td>
-                               <td>March 23, 2024 12:00PM </td>
-                               <td class="cursor-p" data-bs-toggle="modal" data-bs-target="#editPropertyModal"><i class="fa fa-ellipsis-h"></i></td>
-                          </tr>
-                          <tr>
-                              <td>
-                                  <div
-                                    class="d-flex align-items-center justify-content-start gap-2">
-                                    <div
-                                        class="custom-control custom-checkbox ms-2 d-inline">
-                                        <input type="checkbox"
-                                            class="custom-control-input"
-                                            id="customCheckBox2" required="">
-                                        <label class="custom-control-label"
-                                            for="customCheckBox2"></label>
-                                    </div>
-                                    <div class="apt_ful">
-                                      2 Plots of Land
-                                    </div>
-                                </div>
-                               </td>
-                               <td>Abakaliki, Ebonyi State</td>
-                               <td>Nigeria</td>
-                               <td><span class="live-badge success">Available</span></td>
-                               <td>N750,000</td>
-                               <td>March 23, 2024 12:00PM </td>
-                               <td class="cursor-p" data-bs-toggle="modal" data-bs-target="#editPropertyModal"><i class="fa fa-ellipsis-h"></i></td>
-                          </tr>
-                          <tr>
-                              <td>
-                                  <div
-                                    class="d-flex align-items-center justify-content-start gap-2">
-                                    <div
-                                        class="custom-control custom-checkbox ms-2 d-inline">
-                                        <input type="checkbox"
-                                            class="custom-control-input"
-                                            id="customCheckBox2" required="">
-                                        <label class="custom-control-label"
-                                            for="customCheckBox2"></label>
-                                    </div>
-                                    <div class="apt_ful">
-                                      2 Plots of Land
-                                    </div>
-                                </div>
-                               </td>
-                               <td>Abakaliki, Ebonyi State</td>
-                               <td>Nigeria</td>
-                               <td><span class="live-badge success">Available</span></td>
-                               <td>N750,000</td>
-                               <td>March 23, 2024 12:00PM </td>
-                               <td class="cursor-p" data-bs-toggle="modal" data-bs-target="#editPropertyModal"><i class="fa fa-ellipsis-h"></i></td>
-                          </tr>
-                          <tr>
-                              <td>
-                                  <div
-                                    class="d-flex align-items-center justify-content-start gap-2">
-                                    <div
-                                        class="custom-control custom-checkbox ms-2 d-inline">
-                                        <input type="checkbox"
-                                            class="custom-control-input"
-                                            id="customCheckBox2" required="">
-                                        <label class="custom-control-label"
-                                            for="customCheckBox2"></label>
-                                    </div>
-                                    <div class="apt_ful">
-                                      2 Plots of Land
-                                    </div>
-                                </div>
-                               </td>
-                               <td>Abakaliki, Ebonyi State</td>
-                               <td>Nigeria</td>
-                               <td><span class="live-badge success">Available</span></td>
-                               <td>N750,000</td>
-                               <td>March 23, 2024 12:00PM </td>
-                               <td class="cursor-p" data-bs-toggle="modal" data-bs-target="#editPropertyModal"><i class="fa fa-ellipsis-h"></i></td>
-                          </tr>
-                          <tr>
-                              <td>
-                                  <div
-                                    class="d-flex align-items-center justify-content-start gap-2">
-                                    <div
-                                        class="custom-control custom-checkbox ms-2 d-inline">
-                                        <input type="checkbox"
-                                            class="custom-control-input"
-                                            id="customCheckBox2" required="">
-                                        <label class="custom-control-label"
-                                            for="customCheckBox2"></label>
-                                    </div>
-                                    <div class="apt_ful">
-                                      2 Plots of Land
-                                    </div>
-                                </div>
-                               </td>
-                               <td>Abakaliki, Ebonyi State</td>
-                               <td>Nigeria</td>
-                               <td><span class="live-badge success">Available</span></td>
-                               <td>N750,000</td>
-                               <td>March 23, 2024 12:00PM </td>
-                               <td class="cursor-p" data-bs-toggle="modal" data-bs-target="#editPropertyModal"><i class="fa fa-ellipsis-h"></i></td>
-                          </tr>
-                          <tr>
-                              <td>
-                                  <div
-                                    class="d-flex align-items-center justify-content-start gap-2">
-                                    <div
-                                        class="custom-control custom-checkbox ms-2 d-inline">
-                                        <input type="checkbox"
-                                            class="custom-control-input"
-                                            id="customCheckBox2" required="">
-                                        <label class="custom-control-label"
-                                            for="customCheckBox2"></label>
-                                    </div>
-                                    <div class="apt_ful">
-                                      2 Plots of Land
-                                    </div>
-                                </div>
-                               </td>
-                               <td>Abakaliki, Ebonyi State</td>
-                               <td>Nigeria</td>
-                               <td><span class="live-badge success">Available</span></td>
-                               <td>N750,000</td>
-                               <td>March 23, 2024 12:00PM </td>
-                               <td class="cursor-p" data-bs-toggle="modal" data-bs-target="#editPropertyModal"><i class="fa fa-ellipsis-h"></i></td>
-                          </tr>
-                          <tr>
-                              <td>
-                                  <div
-                                    class="d-flex align-items-center justify-content-start gap-2">
-                                    <div
-                                        class="custom-control custom-checkbox ms-2 d-inline">
-                                        <input type="checkbox"
-                                            class="custom-control-input"
-                                            id="customCheckBox2" required="">
-                                        <label class="custom-control-label"
-                                            for="customCheckBox2"></label>
-                                    </div>
-                                    <div class="apt_ful">
-                                      2 Plots of Land
-                                    </div>
-                                </div>
-                               </td>
-                               <td>Abakaliki, Ebonyi State</td>
-                               <td>Nigeria</td>
-                               <td><span class="live-badge success">Available</span></td>
-                               <td>N750,000</td>
-                               <td>March 23, 2024 12:00PM </td>
-                               <td class="cursor-p" data-bs-toggle="modal" data-bs-target="#editPropertyModal"><i class="fa fa-ellipsis-h"></i></td>
-                          </tr>
+                                    </td>
+                                    <td>{{ $property->location }}</td>
+                                    <td>{{ $property->country }}</td>
+                                    <td><span class="live-badge {{ $property->status == 1 ? 'success' : 'danger' }}">{{ $property->status == 1 ? 'Available' : 'Unavailable' }}</span></td>
+                                    <td>N{{ number_format($property->amount,2) }}</td>
+                                    <td>{{ formatDate($property->date_listed) }} </td>
+                                    <td class="cursor-p" data-bs-toggle="modal" data-bs-target="#editPropertyModal{{ $property->id }}"><i class="fa fa-ellipsis-h"></i></td>
+                                </tr>
+                            @endforeach
+                            @endif
                          </tbody>
                      </table>
                 </div>
@@ -236,18 +72,22 @@
          </section>
       </main>
 
-
-      <div class="modal fade" id="editPropertyModal" tabindex="-1" aria-labelledby="editPropertyModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-sm modal-dialog-centered">
-             <div class="modal-content">
-                  <div class="modal-body rounded">
-                      <a href="/realtor/edit-properties" class="new-discussion-btn btn-success d-block w-100 mb-4"><i class="fa fa-pen"></i> Edit Property</a>
-                      
-                        <button type="button" data-bs-dismiss="modal" class="new-discussion-btn outline-success w-100 mb-2">Cancel</button>
-                  </div>
-             </div>
+      @if($properties)
+      @foreach ($properties as $property)
+        <div class="modal fade" id="editPropertyModal{{ $property->id }}" tabindex="-1" aria-labelledby="editPropertyModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-sm modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body rounded">
+                        <a href="{{ route('realtor.properties.edit', $property->id) }}" class="new-discussion-btn btn-success d-block w-100 mb-4"><i class="fa fa-pen"></i> Edit Property</a>
+                        
+                            <button type="button" data-bs-dismiss="modal" class="new-discussion-btn outline-success w-100 mb-2">Cancel</button>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
+      @endforeach
+      @endif
+
 
 </div>
 

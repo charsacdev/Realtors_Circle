@@ -1,5 +1,6 @@
 @extends('agency.dashboardheader') 
   @section('content-dashboard')
-    @livewire('agency.customers-details')
+    @section('title', 'Customer Details')
+    @livewire('agency.customers-details', ['customer_id' => $customer_id])
   @endsection
 

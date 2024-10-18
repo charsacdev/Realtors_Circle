@@ -5,7 +5,16 @@
              <div class="container">
                   <form action="">
                        <h4 class="form-title">Meeting Schedule</h4>
-                       <div class="row">
+                       <div>
+                         <div>
+                              <b>Realtor: </b> {{ "$realtor->first_name $realtor->last_name" }}
+                         </div>
+                         <div>
+                              <b>Email: </b> {{ $realtor->email }}
+                         </div>
+                       </div>
+
+                       <div class="row mt-5">
                             <div class="col-sm-6 mb-4">
                                  <div class="form-group">
                                       <h6>Select Date</h6>

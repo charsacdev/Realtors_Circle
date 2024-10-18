@@ -4666,6 +4666,9 @@ select:focus-within{
     height: 320px;
     border-radius: 7px;
     overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 @media (max-width: 991px){
@@ -4693,8 +4696,8 @@ select:focus-within{
 }
 
 .web-banner-ctn img{
-    width: 100%;
-    height: auto;
+    height: 100%;
+    width: auto;
 }
 
 .capat-card{
@@ -4724,7 +4727,8 @@ select:focus-within{
 .capat-card .primary-pal,
 .capat-card .secondary-pal,
 .capat-card .accent-pal,
-.capat-card .text-pal{
+.capat-card .text-pal,
+.pal-ctn{
     height: 90px;
 }
 
@@ -5346,5 +5350,10 @@ footer .sub-btn{
         margin-bottom: 10px;
     }
 
+}
+
+.error{
+    font-size: 13px;
+    color: orangered;
 }
 

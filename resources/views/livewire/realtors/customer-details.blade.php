@@ -9,25 +9,25 @@
                        <div class="col-sm-6 mb-4">
                             <div class="form-group">
                                  <h6>First Name</h6>
-                                 <input type="text" value="John" name="" id="" class="form-control">
+                                 <input type="text" value="{{ $customer->first_name }}" name="" id="" class="form-control">
                             </div>
                        </div>
                        <div class="col-sm-6 mb-4">
                             <div class="form-group">
                                  <h6>Last Name</h6>
-                                 <input type="text" value="Doe" name="" id="" class="form-control">
+                                 <input type="text" value="{{ $customer->last_name }}" name="" id="" class="form-control">
                             </div>
                        </div>
                        <div class="col-sm-6 mb-4">
                             <div class="form-group">
                                  <h6>Email Address</h6>
-                                 <input type="text" value="john@gmail.com" name="" id="" class="form-control">
+                                 <input type="text" value="{{ $customer->email }}" name="" id="" class="form-control">
                             </div>
                        </div>
                        <div class="col-sm-6 mb-4">
                             <div class="form-group">
                                  <h6>Phone Number</h6>
-                                 <input type="text" value="+234 893848 847738" name="" id="" class="form-control">
+                                 <input type="text" value="{{ $customer->phone_number }}" name="" id="" class="form-control">
                             </div>
                        </div>
                        <div class="col-12 mb-4">
@@ -35,8 +35,8 @@
                               <label for="">Select Channel</label>
                               <select name="" id="" class="form-control">
                                <option value="">Select</option>
-                               <option value="all">Email</option>
-                               <option>Whatsapp</option>
+                               <option value="{{ $customer->email }}">Email</option>
+                               <option value="{{ $customer->phone_number }}">Whatsapp</option>
                               </select>
                          </div>
                     </div>

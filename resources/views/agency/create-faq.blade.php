@@ -1,5 +1,6 @@
 @extends('agency.dashboardheader') 
+  @section('title', 'Create FAQ')
   @section('content-dashboard')
-    @livewire('agency.faqs')
+    @livewire('agency.create-faq')
   @endsection
 

@@ -188,8 +188,53 @@ $(document).ready(function () {
 
   });
 
+  
 
-  var table = $('#livelearn-table').DataTable({
+  var table = $('#user-table').DataTable({
+    searching: true,
+    paging: true,
+    select: true,
+    lengthChange: false,
+    language: {
+      paginate: {
+        next: '<i class="fa fa-angle-double-right" aria-hidden="true"></i>',
+        previous: '<i class="fa fa-angle-double-left" aria-hidden="true"></i>'
+      }
+    }
+
+  });
+  
+
+  var table = $('#dashboard-table').DataTable({
+    searching: false,
+    paging: false,
+    select: false,
+    lengthChange: false,
+    language: {
+      paginate: {
+        next: '<i class="fa fa-angle-double-right" aria-hidden="true"></i>',
+        previous: '<i class="fa fa-angle-double-left" aria-hidden="true"></i>'
+      }
+    }
+
+  });
+  
+
+  var table = $('#contact-table').DataTable({
+    searching: true,
+    paging: true,
+    select: true,
+    lengthChange: false,
+    language: {
+      paginate: {
+        next: '<i class="fa fa-angle-double-right" aria-hidden="true"></i>',
+        previous: '<i class="fa fa-angle-double-left" aria-hidden="true"></i>'
+      }
+    }
+
+  });
+
+  var table = $('#agency-table').DataTable({
     searching: true,
     paging: true,
     select: true,

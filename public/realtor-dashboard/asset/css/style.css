@@ -5382,5 +5382,13 @@ footer .sub-btn{
     border: 1px solid  var(--primary-green)!important;
 }
 
+.error{
+    color: orangered;
+    font-size: 13px;
+}
+
+.alert{
+    text-align: center;
+}
 
 

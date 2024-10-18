@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agency Dashboard - Realtors Circle</title>
+    <title>@yield('title', 'Dashboard') - Realtors Circle</title>
 
     <!--asset-->
     <link rel="shortcut icon" type="text/css" href="{{asset('agency-dashboard/asset/img/favicon.png')}}">
@@ -26,6 +26,16 @@
     <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
     <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
 
+       <!--Color Picker-->
+       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/classic.min.css"/> <!-- 'classic' theme -->
+       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/monolith.min.css"/> <!-- 'monolith' theme -->
+       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/nano.min.css"/> <!-- 'nano' theme -->
+       <script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.min.js"></script>
+       <script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.es5.min.js"></script>
+
+    <!--SummerNotes-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.20/summernote-bs5.min.css" integrity="sha512-ngQ4IGzHQ3s/Hh8kMyG4FC74wzitukRMIcTOoKT3EyzFZCILOPF0twiXOQn75eDINUfKBYmzYn2AA8DkAk8veQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
   
     <!--Custom CSS-->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.0/dist/chart.min.js"></script>
@@ -33,12 +43,7 @@
     <link rel="stylesheet" href="{{asset('agency-dashboard/asset/css/style.css')}}">
     <link rel="stylesheet" href="{{asset('agency-dashboard/asset/css/responsive.css')}}">
 
-    <!--Color Picker-->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/classic.min.css"/> <!-- 'classic' theme -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/monolith.min.css"/> <!-- 'monolith' theme -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/nano.min.css"/> <!-- 'nano' theme -->
-    <script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.es5.min.js"></script>
+ 
 
 </head>
 
@@ -48,7 +53,22 @@
         <header>
           <div class="top">
               <div class="container">
-                  <h3 class="logo">Success Haven</h3>
+                  <h3 class="logo">
+                    @php
+                      $settings = auth('web')->user()->settings;
+                      if(!empty($settings))
+                      {
+                        $logo = json_decode($settings->settings)->logo;
+                      }
+                    @endphp
+                    @if (@$logo)
+                      <img src="{{ asset('storage/uploads/' . $logo) }}" alt="logo" height="50px">
+                    @elseif (auth('web')->user()->company_name)
+                     {{ auth('web')->user()->company_name }}
+                    @else
+                      Realtors Circle
+                    @endif 
+                  </h3>
                   <div class="search-ctn d-none d-md-block">
                       <img src="{{asset('agency-dashboard/asset/img/icons/search-icon.png')}}" alt="">
                       <input type="text" placeholder="Search">
@@ -67,9 +87,13 @@
                                 <div class="d-flex align-items-center justify-content-between gap-4">
                                     <div class="d-flex align-items-center align-items-start gap-3">
                                        <a href="/agency/agency-insight">
-                                          <div class="img">
-                                              <img src="{{asset('agency-dashboard/asset/img/user-img.png')}}" class="img-flui" alt="">
-                                          </div>
+                                        <div class="img">
+                                          @if (auth()->user()->profile_image)
+                                            <img src="{{ asset('storage/uploads/' . auth()->user()->profile_image) }}" class="img-flui" alt="profile image">
+                                          @else
+                                          <img src="{{asset('realtor-dashboard/asset/img/user-img.png')}}" class="img-flui" alt="profile image">
+                                          @endif
+                                        </div>
                                        </a>
                                     </div>
                                 </div>
@@ -94,9 +118,16 @@
                                   <li class="mt-4">
                                     <a href="/agency/agency-pro-version" class="new-discussion-btn btn-success text-center fs-12 w-100 d-block">Subscribe to Pro Version</a>
                                   </li>
-                                    <li class="dropdown-item">
-                                        <a href="javascript:;">
-                                        Logout</a></li>
+                                  <li class="dropdown-item">
+                                    <a href="javascript:;">
+                                    
+                                    <form method="POST" action="{{ route('logout') }}">
+                                      @csrf
+                                      <button class="border-0 bg-transparent" type="submit">Logout</button>
+                                  </form>
+                                    </a>
+                                  
+                                  </li>
                                 </ul>
                             </div>
                         </div>
@@ -111,8 +142,8 @@
            <nav class="navbar navbar-expand-lg">
                <div class="container cosynav">
                  <a class="navbar-brand text-light" href="">
-                   <small>Good morning</small> <br> 
-                   <span>Hello John Doe</span>
+                   <small>{{ greetings() }}</small> <br> 
+                   <span>Hello {{ auth()->user()->first_name ? auth()->user()->first_name : 'Boss' }}!</span>
                  </a>
        
                  <!-- Nav Item -->
@@ -160,22 +191,128 @@
 
         </div>
 
+        
+        <!--*************** Success Update Record Modal *******************-->
         <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-sm modal-dialog-centered">
-                 <div class="modal-content">
-                      <div class="modal-body rounded">
-                        <div class="d-flex align-items-center justify-content-center mb-2 mt-3">
-                            <img src="{{asset('agency-dashboard/asset/img/success-star-checked.png')}}" width="50px" alt="icon">
-                        </div>
-                           <h3 class="text-center mb-2">Success!</h3>
-                          <div class="text-center mb-2">
-                            You have successfully registered for a LiveLearn Session.
-                          </div>
-                            <button type="button" class="new-discussion-btn w-100 mb-2">Go Back</button>
+          <div class="modal-dialog modal-sm modal-dialog-centered">
+              <div class="modal-content">
+                    <div class="modal-body rounded">
+                      <div class="d-flex align-items-center justify-content-center mb-2 mt-3">
+                          <img src="{{asset('agency/asset/img/icons/verify-icon.png')}}" width="50px" alt="icon">
                       </div>
-                 </div>
-            </div>
-        </div>
+                        <h3 class="text-center mb-2">Success!</h3>
+                        <div class="text-center mb-2" id="successBag"></div>
+                          <button type="button" data-bs-dismiss="modal" class="new-discussion-btn btn-success w-100 mb-2">Ok</button>
+                    </div>
+              </div>
+          </div>
+      </div>
+
+      <button type="hidden" style="display: none" id="successUpdateBtn" data-bs-toggle="modal" data-bs-target="#successModal"></button>
+
+
+
+        <!--*************** Failed Update Record Modal *******************-->
+        <div class="modal fade" id="failureModal" tabindex="-1" aria-labelledby="failureModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-sm modal-dialog-centered">
+              <div class="modal-content">
+                    <div class="modal-body rounded">
+                      <div class="d-flex align-items-center justify-content-center mb-2 mt-3">
+                          <img src="{{asset('realtors/asset/img/icons/error.png')}}" width="50px" alt="icon">
+                      </div>
+                        <h3 class="text-center mb-2">Failure!</h3>
+                        <div class="text-center mb-2" id="failureBag"></div>
+                          <button type="button" data-bs-dismiss="modal" class="new-discussion-btn btn-danger w-100 mb-2">Ok</button>
+                    </div>
+              </div>
+          </div>
+      </div>
+
+      <button type="hidden" style="display: none" id="failureUpdateBtn" data-bs-toggle="modal" data-bs-target="#failureModal"></button>
+
+
+      <script>
+        document.addEventListener('DOMContentLoaded', function () {
+          
+            /////////////////////// Listen for success events ////////////////////////////////////
+            Livewire.on('success', (data) => {
+              var message = data[0]['message'];
+
+              let successBag = document.getElementById('successBag');
+              if(successBag){
+                successBag.innerHTML = message;
+              }
+
+              let successBtn = document.getElementById('successUpdateBtn');
+              if(successBtn){
+                successBtn.click();
+              }
+            });
+
+            /////////////////////// Listen for failure events ////////////////////////////////////
+            Livewire.on('failure', (data) => {
+
+              var message = data[0]['message'];
+
+              var failureBag = document.getElementById('failureBag');
+              if(failureBag){
+                failureBag.innerHTML = message;
+              }
+
+              var failureBtn = document.getElementById('failureUpdateBtn');
+              if(failureBtn){
+                failureBtn.click();
+              }
+
+            });
+
+
+            /////////////////////// Listen for delete events ////////////////////////////////////
+            Livewire.on('deleted', (data) => {
+              var message = data[0]['message'];
+              var src = data[0]['src'];
+              var id = data[0]['id'];
+
+              var parent_container = '';
+
+              if (src === 'testimonial') {
+                  parent_container = document.querySelector('#testimonial-card' + id);
+
+                  if (parent_container) {
+                      parent_container.remove(); 
+                  }
+              }else if(src == 'faq'){
+                parent_container = document.querySelector('#qua-container' + id);
+
+                if (parent_container) {
+                    parent_container.remove(); 
+                }
+              }
+
+              var successBag = document.getElementById('successBag');
+              if (successBag) {
+                  successBag.innerHTML = message; 
+              }
+
+              var successBtn = document.getElementById('successUpdateBtn');
+              if (successBtn) {
+                  successBtn.click(); 
+
+                  setTimeout(() => {
+                    location.reload();
+                  }, 2000);
+              }
+          });
+            /////////////////////// Listen for notification mark all ////////////////////////////////////
+          Livewire.on('markallread', () => {
+            var notification = $('.notification-title');
+            notification.addClass('read');
+          });
+
+
+        });
+
+      </script>
     
     
     
@@ -194,7 +331,33 @@
         <script src="{{asset('agency-dashboard/asset/js/dashboard.js')}}"></script>
         <script src="{{asset('agency-dashboard/asset/js/plugins_init.js')}}"></script>
         <script src="{{asset('agency-dashboard/asset/js/main.js')}}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.20/summernote.min.js" integrity="sha512-6rE6Bx6fCBpRXG/FWpQmvguMWDLWMQjPycXMr35Zx/HRD9nwySZswkkLksgyQcvrpYMx0FELLJVBvWFtubZhDQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script>
 
+              //Confirm Delete
+              function confirmDeletion(event, data) {
+                  Swal.fire({
+                      title: 'Are you sure?',
+                      text: "You won't be able to revert this!",
+                      icon: 'warning',
+                      showCancelButton: true,
+                      confirmButtonColor: '#3085d6',
+                      cancelButtonColor: '#d33',
+                      confirmButtonText: 'Yes, delete it!'
+                  }).then((result) => {
+                      if (result.isConfirmed) {
+                          Livewire.dispatch(event, {source_id : data['id']}); // Dispatch Livewire event for deletion
+                      }
+                  });
+              }
+
+              //Mark a notification read
+              function markRead(data)
+              {
+                Livewire.dispatch('markread', {notification_id : data['id']})
+              }
+
+        </script>
 
         <script>
             $(document).ready(function(){
@@ -293,7 +456,7 @@
           
                 });
 
-                $('.trash-card').on('click', function(){
+                $('.trash-car').on('click', function(){
                   var _this = $(this);
                     trash('.testimonial-card', _this);
                 });
@@ -342,229 +505,13 @@
                 })
 
 
-                 // Color Picker
-                  const pickr_primary = Pickr.create({
-                      el: '.primary-color-picker',
-                      theme: 'classic', // can be 'monolith', or 'classic' or 'nano'
-                      container: 'div',
-                      default: '#45BA63',
-                      swatches: [
-                        'rgba(244, 67, 54, 1)',
-                        'rgba(233, 30, 99, 0.95)',
-                        'rgba(156, 39, 176, 0.9)',
-                        'rgba(103, 58, 183, 0.85)',
-                        'rgba(63, 81, 181, 0.8)',
-                        'rgba(33, 150, 243, 0.75)',
-                        'rgba(3, 169, 244, 0.7)',
-                        'rgba(0, 188, 212, 0.7)',
-                        'rgba(0, 150, 136, 0.75)',
-                        'rgba(76, 175, 80, 0.8)',
-                        'rgba(139, 195, 74, 0.85)',
-                        'rgba(205, 220, 57, 0.9)',
-                        'rgba(255, 235, 59, 0.95)',
-                        'rgba(255, 193, 7, 1)',
-                      ],
-                
-                      components: {
-                
-                          // Main components
-                          preview: true,
-                          opacity: true,
-                          hue: true,
-                
-                          // Input / output Options
-                          interaction: {
-                              hex: true,
-                              rgba: true,
-                              hsla: true,
-                              hsva: true,
-                              cmyk: true,
-                              input: true,
-                              clear: true,
-                              save: true
-                          }
-                      }
-                    })
+
                   
-                  const pickr_secondary = Pickr.create({
-                      el: '.secondary-color-picker',
-                      theme: 'classic', // or 'monolith', or 'nano'
-                      container: 'div',
-                      default: '#1179EC',
-                      swatches: [
-                        'rgba(244, 67, 54, 1)',
-                        'rgba(233, 30, 99, 0.95)',
-                        'rgba(156, 39, 176, 0.9)',
-                        'rgba(103, 58, 183, 0.85)',
-                        'rgba(63, 81, 181, 0.8)',
-                        'rgba(33, 150, 243, 0.75)',
-                        'rgba(3, 169, 244, 0.7)',
-                        'rgba(0, 188, 212, 0.7)',
-                        'rgba(0, 150, 136, 0.75)',
-                        'rgba(76, 175, 80, 0.8)',
-                        'rgba(139, 195, 74, 0.85)',
-                        'rgba(205, 220, 57, 0.9)',
-                        'rgba(255, 235, 59, 0.95)',
-                        'rgba(255, 193, 7, 1)',
-                      ],
-                
-                      components: {
-                
-                          // Main components
-                          preview: true,
-                          opacity: true,
-                          hue: true,
-                
-                          // Input / output Options
-                          interaction: {
-                              hex: true,
-                              rgba: true,
-                              hsla: true,
-                              hsva: true,
-                              cmyk: true,
-                              input: true,
-                              clear: true,
-                              save: true
-                          }
-                      }
-                  })
                   
-                  const pickr_accent = Pickr.create({
-                      el: '.accent-color-picker',
-                      theme: 'classic', // or 'monolith', or 'nano'
-                      container: 'div',
-                      default: '#202A54',
-                      swatches: [
-                        'rgba(244, 67, 54, 1)',
-                        'rgba(233, 30, 99, 0.95)',
-                        'rgba(156, 39, 176, 0.9)',
-                        'rgba(103, 58, 183, 0.85)',
-                        'rgba(63, 81, 181, 0.8)',
-                        'rgba(33, 150, 243, 0.75)',
-                        'rgba(3, 169, 244, 0.7)',
-                        'rgba(0, 188, 212, 0.7)',
-                        'rgba(0, 150, 136, 0.75)',
-                        'rgba(76, 175, 80, 0.8)',
-                        'rgba(139, 195, 74, 0.85)',
-                        'rgba(205, 220, 57, 0.9)',
-                        'rgba(255, 235, 59, 0.95)',
-                        'rgba(255, 193, 7, 1)',
-                      ],
-                
-                      components: {
-                
-                          // Main components
-                          preview: true,
-                          opacity: true,
-                          hue: true,
-                
-                          // Input / output Options
-                          interaction: {
-                              hex: true,
-                              rgba: true,
-                              hsla: true,
-                              hsva: true,
-                              cmyk: true,
-                              input: true,
-                              clear: true,
-                              save: true
-                          }
-                      }
-                  })
                   
-                  const pickr_text = Pickr.create({
-                      el: '.text-color-picker',
-                      theme: 'classic', // or 'monolith', or 'nano'
-                      container: 'div',
-                      default: '#6B6B6B',
-                      swatches: [
-                        'rgba(244, 67, 54, 1)',
-                        'rgba(233, 30, 99, 0.95)',
-                        'rgba(156, 39, 176, 0.9)',
-                        'rgba(103, 58, 183, 0.85)',
-                        'rgba(63, 81, 181, 0.8)',
-                        'rgba(33, 150, 243, 0.75)',
-                        'rgba(3, 169, 244, 0.7)',
-                        'rgba(0, 188, 212, 0.7)',
-                        'rgba(0, 150, 136, 0.75)',
-                        'rgba(76, 175, 80, 0.8)',
-                        'rgba(139, 195, 74, 0.85)',
-                        'rgba(205, 220, 57, 0.9)',
-                        'rgba(255, 235, 59, 0.95)',
-                        'rgba(255, 193, 7, 1)',
-                      ],
-                
-                      components: {
-                
-                          // Main components
-                          preview: true,
-                          opacity: true,
-                          hue: true,
-                
-                          // Input / output Options
-                          interaction: {
-                              hex: true,
-                              rgba: true,
-                              hsla: true,
-                              hsva: true,
-                              cmyk: true,
-                              input: true,
-                              clear: true,
-                              save: true
-                          }
-                      }
-                  })
 
-                  //Primary color
-                  pickr_primary.on('init', instance => {
-                    showHexCodeFromInstance(instance, '#primary-color-ctn')
-                  }).on('save', (color, instance) => {
-                    showHexCodeFromColor(color, '#primary-color-ctn');
-                    pickr_primary.hide();
-                  });
-
-                  //Secondary color
-                  pickr_secondary.on('init', instance => {
-                    showHexCodeFromInstance(instance, '#secondary-color-ctn')
-                  }).on('save', (color, instance) => {
-                      showHexCodeFromColor(color, '#secondary-color-ctn');
-                      pickr_secondary.hide();
-                  });
-
-                  //Accent color
-                  pickr_accent.on('init', instance => {
-                    showHexCodeFromInstance(instance, '#accent-color-ctn')
-                  }).on('save', (color, instance) => {
-                    showHexCodeFromColor(color, '#accent-color-ctn');
-                    pickr_accent.hide();
-                  });
-
-                  //Primary color
-                  pickr_text.on('init', instance => {
-                    showHexCodeFromInstance(instance, '#text-color-ctn')
-                  }).on('save', (color, instance) => {
-                    showHexCodeFromColor(color, '#text-color-ctn')
-                    pickr_text.hide();
-                  });
-
-
-
-
-                  function showHexCodeFromInstance(instance, id){
-                    var hexCode = instance._color.toHEXA().toString();
-                    $(id).val(hexCode);
-                  }
-
-                  function showHexCodeFromColor(color, id){
-                    var hexCode = color.toHEXA().toString();
-                    $(id).val(hexCode);
-                  }
 
                });
       </script>
-
-     
-
-       
     </body>
 </html>

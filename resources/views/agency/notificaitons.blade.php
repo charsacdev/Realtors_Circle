@@ -1,5 +1,5 @@
 @extends('agency.dashboardheader') 
   @section('content-dashboard')
-    @livewire('agency.admin-notifications')
+    @livewire('agency.notifications')
   @endsection
 

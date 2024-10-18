@@ -9,31 +9,31 @@
                     <div class="col-sm-6 mb-4">
                          <div class="form-group">
                               <label for="">First Name</label>
-                              <input type="text" value="John" id="" class="form-control">
+                              <input type="text" value="{{ $schedule->first_name }}" id="" class="form-control">
                          </div>
                     </div>
                     <div class="col-sm-6 mb-4">
                          <div class="form-group">
                               <label for="">Last Name</label>
-                              <input type="text" value="Doe" id="" class="form-control">
+                              <input type="text" value="{{ $schedule->last_name }}" id="" class="form-control">
                          </div>
                     </div>
                     <div class="col-sm-6 mb-4">
                          <div class="form-group">
                               <label for="">Email Address</label>
-                              <input type="text" value="johnwilliamsdoe@gmail.com" id="" class="form-control">
+                              <input type="text" value="{{ $schedule->email }}" id="" class="form-control">
                          </div>
                     </div>
                     <div class="col-sm-6 mb-4">
                          <div class="form-group">
                               <label for="">Phone Number</label>
-                              <input type="text" value="+23483498748" id="" class="form-control">
+                              <input type="text" value="{{ $schedule->phone_number }}" id="" class="form-control">
                          </div>
                     </div>
                     <div class="col-12 mb-4 pb-5" style="border-bottom: 2px dashed #ccc;">
                          <div class="form-group">
                               <label for="">Message</label>
-                              <textarea rows="5" id="" class="form-control">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore, quidem placeat cum a delectus culpa iste quibusdam atque explicabo beatae!</textarea>
+                              <textarea rows="5" id="" class="form-control">{{ $schedule->reason }}</textarea>
                          </div>
                     </div>
                     <div class="col-12 mb-4">
@@ -41,8 +41,8 @@
                               <label for="">Select Channel</label>
                               <select name="" id="" class="form-control">
                                <option value="">Select</option>
-                               <option value="all">Email</option>
-                               <option>Whatsapp</option>
+                               <option value="a{{ $schedule->email }}">Email</option>
+                               <option value="{{ $schedule->phone_number }}">Whatsapp</option>
                               </select>
                          </div>
                     </div>
