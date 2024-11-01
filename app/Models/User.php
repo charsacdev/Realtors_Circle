@@ -85,7 +85,7 @@ class User extends Authenticatable
     //Relationship for the user having many notifications
     public function notifications()
     {
-        return $this->hasMany(Notification::class);
+        return $this->hasMany(Notification::class)->orderBy('id', 'DESC');
     }
 
 
@@ -131,6 +131,19 @@ class User extends Authenticatable
      public function settings()
      {
         return $this->hasOne(WebsiteSetting::class);
+     }
+
+     //Relationship for agency contact us messages
+     public function messages()
+     {
+        return $this->hasMany(ContactMessage::class);
+     }
+
+
+     //Relationship for agency teams
+     public function teams()
+     {
+        return $this->hasMany(Team::class);
      }
 
 }

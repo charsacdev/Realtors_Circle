@@ -46,8 +46,8 @@
               <div class="container">
                 <h3 class="logo">
                   @php
-                    $agency_id = auth('web')->user()->agency['0']->id;
-                    $settings = \App\Models\WebsiteSetting::where('user_id', $agency_id)->first();
+                    $agency_id = @auth('web')->user()->agency['0']->id;
+                    $settings = @\App\Models\WebsiteSetting::where('user_id', $agency_id)->first();
 
                     if(!empty($settings))
                     {
@@ -114,7 +114,7 @@
                                     <form method="POST" action="{{ route('logout') }}">
                                       @csrf
                                       <button class="border-0 bg-transparent" type="submit">Logout</button>
-                                  </form>
+                                    </form>
                                     </a>
                                   
                                   </li>
@@ -291,6 +291,11 @@
         notification.addClass('read');
       });
 
+      ////////////////////////// Listen for reset Editor event /////////////////////////////////
+      Livewire.on('resetEditor', () => {
+        $('.summernote').summernote('reset');  // Clears all content and formatting in the editor
+      });
+
     })
 
   </script>
@@ -309,8 +314,8 @@
     <script src="{{asset('realtor-dashboard/vendor/bootstrap-daterangepicker/daterangepicker.js')}}"></script>
     <script src="{{asset('realtor-dashboard/vendor/bootstrap-datepicker/bootstrap-datepicker.js')}}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    @if (isRouteActive(['realtor.dashboard', 'realtor.dashboard.*']) != 'active')
-      {{-- <script src="{{asset('realtor-dashboard/asset/js/dashboard.js')}}"></script> --}}
+    @if (isRouteActive(['realtor.dashboard', 'realtor.dashboard.*']) == 'active')
+      <script src="{{asset('realtor-dashboard/asset/js/dashboard.js')}}"></script>
     @endif
     <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.20/summernote.min.js" integrity="sha512-6rE6Bx6fCBpRXG/FWpQmvguMWDLWMQjPycXMr35Zx/HRD9nwySZswkkLksgyQcvrpYMx0FELLJVBvWFtubZhDQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="{{asset('realtor-dashboard/asset/js/plugins_init.js')}}"></script>
@@ -551,8 +556,14 @@
                     $('.edet-ctn').removeClass('active');
                 })
 
+                
+
+
+    
+
       });
     </script>
+    @stack('scripts')
 </body>
 
 </html>

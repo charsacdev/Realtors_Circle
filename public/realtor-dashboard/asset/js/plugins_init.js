@@ -90,27 +90,7 @@ $(document).ready(function () {
   }
 
 
-  if($('.summernote').length > 0){
 
-    $('.summernote').summernote({
-      height: 300, // Set the height of the editor
-      placeholder: 'Start typing...',
-      toolbar: [
-        // Full toolbar options
-        ['style', ['style']],
-        ['font', ['bold', 'italic', 'underline', 'clear']],
-        ['fontname', ['fontname']],
-        ['fontsize', ['fontsize']],
-        ['color', ['color']],
-        ['para', ['ul', 'ol', 'paragraph']],
-        ['height', ['height']],
-        ['table', ['table']],
-        ['insert', ['link', 'picture', 'video', 'hr']],
-        ['view', ['fullscreen', 'codeview', 'help']],
-        ['misc', ['undo', 'redo']]
-    ]
-    });
-  }
 
 
   // Toggle Password Input Visibility

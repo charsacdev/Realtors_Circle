@@ -13,12 +13,13 @@ class ContactMessage extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $username;
+    public $username, $company_name = '';
 
-    public function __construct($username)
+    public function __construct($username, $company_name)
     {
         
-        $this->username=$username;
+        $this->username = $username;
+        $this->company_name = $company_name;
     }
 
 

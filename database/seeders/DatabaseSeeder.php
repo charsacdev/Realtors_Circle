@@ -23,5 +23,8 @@ class DatabaseSeeder extends Seeder
         // $this->call(CustomerSeeder::class);
         // $this->call(PropertySeeder::class);
         // $this->call(NotificationSeeder::class);
+        // $this->call(UserSeeder::class);
+        // $this->call(AgencyRealtorSeeder::class);
+        // $this->call(AgencyRealtorApplication::class);
     }
 }

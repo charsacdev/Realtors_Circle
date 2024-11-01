@@ -18,9 +18,9 @@ class ContactMessageAdmin extends Mailable
     public function __construct($username,$useremail,$message)
     {
         
-        $this->username=$username;
-        $this->useremail=$useremail;
-        $this->message=$message;
+        $this->username = $username;
+        $this->useremail = $useremail;
+        $this->message = $message;
     }
 
 

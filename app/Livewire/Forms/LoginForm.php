@@ -3,6 +3,7 @@
 namespace App\Livewire\Forms;
 
 use Livewire\Form;
+use App\Models\User;
 use Livewire\Attributes\Validate;
 use Illuminate\Support\Facades\Auth;
 
@@ -31,10 +32,20 @@ class LoginForm extends Form
         // Attempt to log the user in
         if (Auth::attempt(['email' => $this->email, 'password' => $this->password])) 
         {
+            if(Auth::user()->email_verified_at){
                 // Regenerate session on successful login
                 session()->regenerate();
+                return true;
 
-            return true;
+            }
+
+            Auth::logout();
+            session()->invalidate();          
+            session()->regenerateToken(); 
+
+            return 'unverified';
+            
+                
         }elseif(!Auth::attempt(['email' => $this->email, 'password' => $this->password]))
         {
             return false;

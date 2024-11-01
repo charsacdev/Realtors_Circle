@@ -5,104 +5,96 @@
                 <div class="col-md-5 mt-5">
                     <div class="profile-ctn">
                         <div class="img" id="imagePreview">
-                            <img src="asset/img/user-picture.png" alt="">
+                            {{-- Default Image --}}
+                            <img class="@if($user->profile_image != '' || $profile_image) d-none @endif" src="{{ asset('realtor-dashboard/asset/img/user-img.png')}}" alt="">
+                                   
+                            {{-- User Existing  Image --}}
+                            @if ($user->profile_image)
+                                 <img class="@if($profile_image) d-none @endif" src="{{ asset('storage/uploads/' . $user->profile_image) }}" alt="">
+                            @endif
+
+                            {{-- Temporary Preview Image --}}
+                            @if ($profile_image)
+                                 <img src="{{ $profile_image->temporaryUrl() }}" alt="">
+                            @endif 
                         </div>
+                        <div wire:loading wire:target="profile_image">Uploading...</div>
                         <div>
-                            <input type="file" class="d-none" name="profile_picture" id="profile_picture">
-                            <label class="file-label" for="profile_picture">Change Picture</label>
+                            <input type="file" class="d-none" wire:model="profile_image" name="profile_image" id="profile_image">
+                            <label class="file-label cursor-p" for="profile_image">Change Picture</label>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-7 mt-5">
                     <div class="profile-details">
                         <h3>Profile Details</h3>
-                        <form action="">
+                        <form wire:submit.prevent="updateProfile" enctype="multipart/form-data">
+                            @csrf
                             <div class="row">
                                 <div class="col-sm-6 mb-4">
                                     <div class="form-group">
                                         <label for="first_name">First Name</label>
-                                        <input type="text" id="first_name" name="" value="Michael" class="form-control">
+                                        <input type="text" id="first_name" name="" wire:model="form.first_name" value="{{ $user->first_name }}" class="form-control">
+                                        <div>
+                                            @error('form.first_name') <span class="error">{{ $message }}</span> @enderror
+                                       </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-6 mb-4">
                                     <div class="form-group">
                                         <label for="last_name">Last Name</label>
-                                        <input type="text" id="last_name" name="" value="Ogbonna" class="form-control">
+                                        <input type="text" id="last_name" wire:model="form.last_name" name="" value="{{ $user->last_name }}" class="form-control">
+                                        <div>
+                                            @error('form.last_name') <span class="error">{{ $message }}</span> @enderror
+                                       </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-6 mb-4">
                                     <div class="form-group">
                                         <label for="email">Email</label>
-                                        <input type="text" id="email" name="" value="myemail@gmail.com" class="form-control">
+                                        <input type="text" id="email" wire:model="form.email" name="" value="{{ $user->email }}" class="form-control">
+                                        <div>
+                                            @error('form.email') <span class="error">{{ $message }}</span> @enderror
+                                       </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-6 mb-4">
                                     <div class="form-group">
                                         <label for="phone_number">Phone Number</label>
-                                        <input type="text" id="phone_number" name="" value="+23489376453" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 mb-4">
-                                    <div class="form-group">
-                                        <label for="gender">Gender</label>
-                                        <select name="gender" id="gener" class="form-control">
-                                           <option value="">Select</option>
-                                           <option value="m">Male</option>
-                                           <option value="f">Female</option>
-                                        </select>
-                                        
-                                    </div>
-                                </div>
-                               
-                            </div>
-                            <div class="row mb-4 pb-4" style="border-bottom: 2px dashed rgba(0,0,0,0.1);">
-                                <div class="col-sm-6 mb-4">
-                                    <div class="form-group">
-                                        <label for="">Password</label>
-                                        <div class="input-group i-group-div">
-                                            <input type="password" value="74877euu377e6" name="password" class="form-control shadow-none psw_input">
-                                            <div class="input-group-text rlf-hd">
-                                              <span class="d-none rlf-hd-show"><i class="fa fa-eye"></i></span>
-                                              <span class="rlf-hd-hide"><i class="fa fa-eye-slash"></i></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 mb-4">
-                                    <div class="form-group">
-                                        <label for="">Confirm Password</label>
-                                        <div class="input-group i-group-div">
-                                            <input type="password" value="74877euu377e6" name="password" class="form-control shadow-none psw_input">
-                                            <div class="input-group-text rlf-hd">
-                                              <span class="d-none rlf-hd-show"><i class="fa fa-eye"></i></span>
-                                              <span class="rlf-hd-hide"><i class="fa fa-eye-slash"></i></span>
-                                            </div>
-                                        </div>
+                                        <input type="text" id="phone_number" wire:model="form.phone_number" name="" value="{{ $user->phone_number }}" class="form-control">
+                                        <div>
+                                            @error('form.phone_number') <span class="error">{{ $message }}</span> @enderror
+                                       </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-12 mb-4">
-                                    <div class="form-group">
-                                        <label for="">Address</label>
-                                        <input type="text" class="form-control bg-transparent">
-                                    </div>
-                                </div>
                                 <div class="col-sm-6 mb-4">
                                     <div class="form-group">
                                         <label for="">City</label>
-                                        <input type="text" class="form-control bg-transparent">
+                                        <input type="text" wire:model="form.city" value="{{ $user->city }}" class="form-control bg-transparent">
+                                        <div>
+                                            @error('form.city') <span class="error">{{ $message }}</span> @enderror
+                                       </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-6 mb-4">
                                     <div class="form-group">
                                         <label for="">State</label>
-                                        <input type="text" class="form-control bg-transparent">
+                                        <input type="text" wire:model="form.state" value="{{ $user->state }}" class="form-control bg-transparent">
+                                        <div>
+                                            @error('form.state') <span class="error">{{ $message }}</span> @enderror
+                                       </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="text-end mt-3">
-                                <button class="new-discussion-btn btn-success">Update Profile</button>
+                                <button class="new-discussion-btn btn-success" type="submit">
+                                    Update Profile &nbsp;
+                                    <span wire:loading>
+                                        <i class="fa fa-spin fa-spinner"></i>
+                                    </span>
+                                </button>
                             </div>
                         </form>
                     </div>

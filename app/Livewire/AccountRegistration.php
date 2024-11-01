@@ -12,6 +12,7 @@ class AccountRegistration extends Component
 
     public function register()
     {
+        
         //Setting the user role
         $this->form->role = $this->role;
         if($this->form->store())

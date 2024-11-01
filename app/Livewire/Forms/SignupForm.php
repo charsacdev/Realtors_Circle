@@ -2,11 +2,13 @@
 
 namespace App\Livewire\Forms;
 
-
 use Livewire\Form;
 use App\Models\User;
+use App\Mail\EmailVerificationMail;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class SignupForm extends Form
 {
@@ -58,6 +60,7 @@ class SignupForm extends Form
     {
         
         $this->validate($this->rules(), $this->messages());
+        $verification_token = uniqid('', true);
         
         try{
             
@@ -67,14 +70,24 @@ class SignupForm extends Form
             $user->slug = generateUniqueSlug();
             $user->role = $this->role;
             $user->company_name = $this->company_name;
+            $user->verification_token = $verification_token;
             $user->save();
 
-            // Log in the user
-            Auth::login($user);
-    
-            $this->reset();
+            $vn_url = route('email.verification', [ 'vn_id' => $user->slug]);
+            $vs_url = route('email.verification', ['vs_id' => $verification_token ]);
 
-            return true;
+            try{
+
+                Mail::to($user->email)->send(new EmailVerificationMail($vs_url));
+
+            }catch(\Exception $e){
+                Log::error('Failed to send email verification link: ' . $e->getMessage());
+            }
+
+            $this->reset();
+            return redirect($vn_url);
+    
+
         }catch(\Exception $e){
             return false;
         }

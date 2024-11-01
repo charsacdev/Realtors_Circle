@@ -108,6 +108,26 @@ Route::get('edit-testimonial/{id}', function ($id) {
     return view('agency.edit-testimonial', ['testimonial_id' => $id]);
 })->name('testimonial.edit');
 
+
+Route::get('create-team', function () {
+    return view('agency.create-team');
+})->name('team.create');
+
+Route::get('edit-team/{id}', function ($id) {
+    return view('agency.edit-team', ['team_id' => $id]);
+})->name('team.edit');
+
+
+Route::get('/contact-message', function () {
+    return view('agency.contact-message');
+})->name('contact-message');
+
+Route::get('/contact-message-details/{id}', function ($id) {
+    return view('agency.contact-message-details', ['message_id' => $id]);
+})->name('contact-message-details');
+
+
+
 Route::get('profile-settings', function () {
     return view('agency.profile-settings');
 })->name('profile-settings');

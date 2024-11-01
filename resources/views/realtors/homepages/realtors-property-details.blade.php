@@ -122,8 +122,125 @@
           <small class="mt-4 d-block d-md-none">&copy;{{date("Y")}} Realtor's Circle. All Rights Reserved.</small>
         </div>
       </footer>
+
+      
+    <!--*************** Success Update Record Modal *******************-->
+    <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-sm modal-dialog-centered">
+           <div class="modal-content">
+                <div class="modal-body rounded">
+                  <div class="d-flex align-items-center justify-content-center mb-2 mt-3">
+                      <img src="{{asset('agency/asset/img/icons/verify-icon.png')}}" width="50px" alt="icon">
+                  </div>
+                     <h3 class="text-center mb-2">Success!</h3>
+                    <div class="text-center mb-2" id="successBag"></div>
+                      <button type="button" data-bs-dismiss="modal" class="new-discussion-btn btn-success w-100 mb-2">Ok</button>
+                </div>
+           </div>
+      </div>
   </div>
 
+  <button type="hidden" style="display: none" id="successUpdateBtn" data-bs-toggle="modal" data-bs-target="#successModal"></button>
+
+
+
+    <!--*************** Failed Update Record Modal *******************-->
+    <div class="modal fade" id="failureModal" tabindex="-1" aria-labelledby="failureModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-sm modal-dialog-centered">
+           <div class="modal-content">
+                <div class="modal-body rounded">
+                  <div class="d-flex align-items-center justify-content-center mb-2 mt-3">
+                      <img src="{{asset('realtors/asset/img/icons/error.png')}}" width="50px" alt="icon">
+                  </div>
+                     <h3 class="text-center mb-2">Failure!</h3>
+                    <div class="text-center mb-2" id="failureBag"></div>
+                      <button type="button" data-bs-dismiss="modal" class="new-discussion-btn btn-danger w-100 mb-2">Ok</button>
+                </div>
+           </div>
+      </div>
+  </div>
+
+  <button type="hidden" style="display: none" id="failureUpdateBtn" data-bs-toggle="modal" data-bs-target="#failureModal"></button>
+
+
+  </div>
+
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      
+        /////////////////////// Listen for success events ////////////////////////////////////
+        Livewire.on('success', (data) => {
+          var message = data[0]['message'];
+
+          let successBag = document.getElementById('successBag');
+          if(successBag){
+            successBag.innerHTML = message;
+          }
+
+          let successBtn = document.getElementById('successUpdateBtn');
+          if(successBtn){
+            successBtn.click();
+          }
+        });
+
+        /////////////////////// Listen for failure events ////////////////////////////////////
+        Livewire.on('failure', (data) => {
+
+          var message = data[0]['message'];
+
+          var failureBag = document.getElementById('failureBag');
+          if(failureBag){
+            failureBag.innerHTML = message;
+          }
+
+          var failureBtn = document.getElementById('failureUpdateBtn');
+          if(failureBtn){
+            failureBtn.click();
+          }
+
+        });
+
+
+        /////////////////////// Listen for delete events ////////////////////////////////////
+        Livewire.on('deleted', (data) => {
+          var message = data[0]['message'];
+          var src = data[0]['src'];
+          var id = data[0]['id'];
+
+          var parent_container = '';
+
+          if (src === 'testimonial') {
+              parent_container = document.querySelector('#testimonial-card' + id);
+
+              if (parent_container) {
+                  parent_container.remove(); 
+              }
+          }
+
+          var successBag = document.getElementById('successBag');
+          if (successBag) {
+              successBag.innerHTML = message; 
+          }
+
+          var successBtn = document.getElementById('successUpdateBtn');
+          if (successBtn) {
+              successBtn.click(); 
+
+              setTimeout(() => {
+                location.reload();
+              }, 2000);
+          }
+      });
+        /////////////////////// Listen for notification mark all ////////////////////////////////////
+      Livewire.on('markallread', () => {
+        var notification = $('.notification-title');
+        notification.addClass('read');
+      });
+
+    })
+
+  </script>
 
   <!-- JS FILES -->
   <script src="{{asset('agency/vendor/jquery/jQuery3.6.1.min.js')}}"></script>

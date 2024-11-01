@@ -35,7 +35,7 @@ class TestimonialForm extends Form
             'client_image.required' => 'Please upload client image',
             'client_image.image' => "Please upload an image",
             'client_image.mimes' => "Unsupported file. Supported image types: jpg,jpeg,png,and gif",
-            'cllient_image.max' => "Image file is too large. Image size should not be more than 1MB",
+            'client_image.max' => "Image file is too large. Image size should not be more than 1MB",
             'client_name.required' => "Please provide client name",
             'client_name.min' => "Client name should not be less 2 character long",
             'client_rating.required' => "Please provide cient rating",

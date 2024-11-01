@@ -4,7 +4,7 @@
           <h3 class="mt-5 fw-bold">Message your Customer</h3>
             <p class="text-muted">Send a message direct and personalized message to your customers</p>
              
-          <form action="">
+          
                <div class="row my-5">
                     <div class="col-sm-6 mb-4">
                          <div class="form-group">
@@ -36,27 +36,82 @@
                               <textarea rows="5" id="" class="form-control">{{ $schedule->reason }}</textarea>
                          </div>
                     </div>
-                    <div class="col-12 mb-4">
-                         <div class="form-group">
-                              <label for="">Select Channel</label>
-                              <select name="" id="" class="form-control">
-                               <option value="">Select</option>
-                               <option value="a{{ $schedule->email }}">Email</option>
-                               <option value="{{ $schedule->phone_number }}">Whatsapp</option>
-                              </select>
+                    <form wire:submit.prevent="sendMail">
+                         @csrf
+                         <div class="col-12 mb-4">
+                              <div class="form-group">
+                                   <label for="">Select Channel</label>
+                                   <select name="channel" id="" wire:model="channel" class="form-control">
+                                   <option value="">Select</option>
+                                   <option value="email">Email</option>
+                                   <option value="whatsapp">Whatsapp</option>
+                                   </select>
+                              </div>
+                              <div>
+                                   @error('channel') <span class="error">{{ $message }} </span>@enderror
+                              </div>
                          </div>
-                    </div>
-                    <div class="col-12 mt-3 mb-4">
-                         <div class="form-group">
-                              <label for="">Response</label>
-                              <textarea rows="10" id="" class="form-control summernote" placeholder="Type response"></textarea>
+                         <div class="col-12">
+                              <div class="form-group">
+                                   <label for="">Subject</label>
+                                   <input type="text" name="subject" wire:model="subject" class="form-control">
+                              </div>
+                              <div>
+                                   @error('subject') <span class="error">{{ $message }} </span>@enderror
+                              </div>
                          </div>
-                    </div>
-                    <div class="col-12">
-                         <button type="button" data-bs-toggle="modal" data-bs-target="#successModal" class="new-discussion-btn btn-success w-100">Send Response</button>
-                    </div>
+                         <div class="col-12 mt-3 mb-4">
+                              <div class="form-group" wire:ignore>
+                                   <label for="">Content</label>
+                                   <textarea rows="10" id="" name="content" class="form-control summernote" wire:model="content" placeholder="Type response"></textarea>
+                              </div>
+                              <div>
+                                   @error('content') <span class="error">{{ $message }} </span>@enderror
+                              </div>
+                         </div>
+                         <div class="col-12">
+                              <button type="submit" class="new-discussion-btn btn-success w-100">
+                                   Send Response &nbsp;
+                                   <span wire:loading>
+                                        <i class="fa fa-spin fa-spinner"></i>
+                                   </span>
+                              </button>
+                         </div>
+                    </form>
                </div>
-          </form>
-     </div>
+          </div>
       </main>
 </div>
+@push('scripts')
+<script>
+  $(document).ready(function(){
+       if($('.summernote').length > 0){
+
+            $('.summernote').summernote({
+                 height: 300, // Set the height of the editor
+                 placeholder: 'Start typing...',
+                 //   fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Merriweather'],
+                 toolbar: [
+                      // Full toolbar options
+                      ['style', ['style']],
+                      ['font', ['bold', 'italic', 'underline', 'clear']],
+                      ['fontname', ['fontname']],
+                      ['fontsize', ['fontsize']],
+                      ['color', ['color']],
+                      ['para', ['ul', 'ol', 'paragraph']],
+                      ['height', ['height']],
+                      ['table', ['table']],
+                      ['insert', ['link', 'picture', 'video', 'hr']],
+                      ['view', ['fullscreen', 'codeview', 'help']],
+                      ['misc', ['undo', 'redo']]
+                 ],
+                 callbacks: {
+                      onChange: function(contents) {
+                           @this.set('content', contents);
+                      }
+                 }
+            });
+       }
+  });
+</script>
+@endpush

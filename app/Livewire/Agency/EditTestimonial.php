@@ -33,10 +33,10 @@ class EditTestimonial extends Component
          {
             $this->dispatch('success', ['message' => 'Testimonial updated successfully!.']);
 
-       }elseif(!$this->form->update())
-       {
-           $this->dispatch('failure', ['message' => 'Something went wrong, please try again.']);
-       }
+        }elseif(!$this->form->update())
+        {
+            $this->dispatch('failure', ['message' => 'Something went wrong, please try again.']);
+        }
         
     }
 

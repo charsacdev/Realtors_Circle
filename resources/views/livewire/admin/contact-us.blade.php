@@ -21,34 +21,40 @@
                                      </div>
                                  </th>
                                  <th>Email Address</th>
+                                 <th>Status</th>
                                  <th>Date</th>
-                                 <th></th>
+                                 <th>Action</th>
                              </thead>
                              <tbody>
-                                 <tr>
-                                     <td>
-                                         <div
-                                             class="d-flex align-items-center justify-content-start gap-2">
-                                             <div
-                                                 class="custom-control custom-checkbox ms-2 d-inline">
-                                                 <input type="checkbox"
-                                                     class="custom-control-input"
-                                                     id="customCheckBox2" required="">
-                                                 <label class="custom-control-label"
-                                                     for="customCheckBox2"></label>
-                                             </div>
-                                             <div class="apt_nit success">
-                                                 <span>S</span>
-                                             </div>
-                                             <div class="apt_ful">
-                                                 Success Haven
-                                             </div>
-                                         </div>
-                                     </td>
-                                     <td>successhaven@gmail.com</td>
-                                     <td>March 23, 2024 12:00PM </td>
-                                     <td><a href="contact-us-details.html"><i class="fa fa-ellipsis-h"></i></a></td>
-                                 </tr>
+                                @if ($messages)
+                                    @foreach ($messages as $message)
+                                        <tr>
+                                            <td>
+                                                <div
+                                                    class="d-flex align-items-center justify-content-start gap-2">
+                                                    <div
+                                                        class="custom-control custom-checkbox ms-2 d-inline">
+                                                        <input type="checkbox"
+                                                            class="custom-control-input"
+                                                            id="customCheckBox2" required="">
+                                                        <label class="custom-control-label"
+                                                            for="customCheckBox2"></label>
+                                                    </div>
+                                                    <div class="apt_nit success">
+                                                        <span>{{ getFirstLetter($message->fullname) }}</span>
+                                                    </div>
+                                                    <div class="apt_ful">
+                                                        {{ $message->fullname }}
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>{{ $message->email }}</td>
+                                            <td>{{ $message->is_read == 1 ? "Read" : "Unread" }}</td>
+                                            <td>{{ formatDate($message->created_at) }}</td>
+                                            <td><a style="cursor: pointer" onclick="updateStatus({{ $message->id }}, '{{ route('admin.contact-us.details', $message->id) }}')"><i class="fa fa-eye"></i></a></td>
+                                        </tr>
+                                    @endforeach
+                                @endif
                              </tbody>
                          </table>
                      </div>
@@ -56,5 +62,4 @@
              </div>
          </div>
      </section>
-    
    </div>

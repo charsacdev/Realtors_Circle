@@ -31,7 +31,7 @@
                     </div>
                </div>
                <div class="form-group counter-container mb-4">
-                    <label for="">Hero Text</label>
+                    <label for="">Home Page Hero Text</label>
                     <textarea name="" class="form-control text-source" rows="5" wire:model='form.hero_text'></textarea>
                     <div class="text-end">
                     <small class="primary-color">
@@ -40,6 +40,30 @@
                     </div>
                     <div>
                          @error('form.hero_text') <span class="error">{{ $message }}</span> @enderror
+                    </div>
+               </div>
+               <div class="form-group counter-container mb-4">
+                    <label for="">Properties Page Hero Text</label>
+                    <textarea name="" class="form-control text-source" rows="5" wire:model='form.property_hero_text'></textarea>
+                    <div class="text-end">
+                    <small class="primary-color">
+                         <span class="entered-text primary-color">0</span>/<span class="total-text primary-color">500</span> words
+                    </small>
+                    </div>
+                    <div>
+                         @error('form.property_hero_text') <span class="error">{{ $message }}</span> @enderror
+                    </div>
+               </div>
+               <div class="form-group counter-container mb-4">
+                    <label for="">Realtors Page Hero Text</label>
+                    <textarea name="" class="form-control text-source" rows="5" wire:model='form.realtor_hero_text'></textarea>
+                    <div class="text-end">
+                    <small class="primary-color">
+                         <span class="entered-text primary-color">0</span>/<span class="total-text primary-color">500</span> words
+                    </small>
+                    </div>
+                    <div>
+                         @error('form.realtor_hero_text') <span class="error">{{ $message }}</span> @enderror
                     </div>
                </div>
                <div class="form-group counter-container mb-4">
@@ -53,6 +77,18 @@
                     <div>
                          @error('form.footer_text') <span class="error">{{ $message }}</span> @enderror
                     </div>
+               </div>
+               <div class="form-group counter-container" wire:ignore>
+                    <label for="">About/Company Description</label>
+                    <textarea name="" class="form-control text-source summernote" wire:model="form.about" rows="5"></textarea>
+                    <div class="text-end">
+                    <small class="primary-color">
+                         <span class="entered-text primary-color">0</span>/<span class="total-text primary-color">500</span> words
+                    </small>
+                    </div>
+               </div>
+               <div class="mb-4">
+                    @error('about') <span class="error">{{ $message }}</span> @enderror
                </div>
                <div class="form-group mb-5">
                     <label for="banner" class="primary-color">Banner Image</label>
@@ -172,45 +208,75 @@
           
           {{-- Testimonials  --}}
           <div class="form-group mb-4">
-          <label for="" class="primary-color mt-4" style="font-size:30px">Testimonials</label>
-          <p class="text-muted">Write a good review from your previous client's make your profile  worthy to buyers and potential clients</p>
-          
-          <div class="npi-container testimonial">
-               <div class="npi-card input-ctn">
-                    <label for="img-upload" class="web-label">
-                         <span><a href="{{ route('agency.testimonial.create') }}">New Testimonial</a></span>
-                    </label>
-               </div>
-
-   
-               @if ($testimonials)
-                    @foreach ($testimonials as $testimony)
-                    <div class="testimonial-card" id="testimonial-card{{ $testimony->id }}">
-                         <div class="update-ctn">
-                              <div class="primary-color cursor-p dropdown text-end"><i class="fa fa-ellipsis-h"></i></div>
-                              <div class="edet-ctn">
-                              <a href="{{ route('agency.testimonial.edit', $testimony->id) }}"><img width="18px" src="{{asset('agency/asset/img/icons/pen-icon.png')}}" alt=""> &nbsp; Edit Testimonial</a>
-                              <span class="trash-card" role="button" onclick="confirmDeletion('deleteTestimonial', {'id': {{ $testimony->id }} })"><i class="fa fa-trash"></i> &nbsp; Delete Testimonial</span>
-                              </div>
-                         </div>
-                         <div class="img-ctn"><img src="{{ asset('storage/uploads/' . $testimony->client_image)}}" alt=""></div>
-                         <h4 class="tc-name">{{ $testimony->client_name }} </h4>
-                         <div class="tc-stars">
-                              <img src="{{ $testimony->client_rating >= 1 ? asset('agency/asset/img/icons/star-icon-yellow.png') : asset('agency/asset/img/icons/star-icon-gray.png') }}" alt="1 star">
-                              <img src="{{ $testimony->client_rating >= 2 ? asset('agency/asset/img/icons/star-icon-yellow.png') : asset('agency/asset/img/icons/star-icon-gray.png') }}" alt="2 star">
-                              <img src="{{ $testimony->client_rating >= 3 ? asset('agency/asset/img/icons/star-icon-yellow.png') : asset('agency/asset/img/icons/star-icon-gray.png') }}" alt="3 star">
-                              <img src="{{ $testimony->client_rating >= 4 ? asset('agency/asset/img/icons/star-icon-yellow.png') : asset('agency/asset/img/icons/star-icon-gray.png') }}" alt="4 star">
-                              <img src="{{ $testimony->client_rating >= 5 ? asset('agency/asset/img/icons/star-icon-yellow.png') : asset('agency/asset/img/icons/star-icon-gray.png') }}" alt="5 star">
-                         </div>
-                         <div class="text-center mb-2"><img width="20px" src="{{asset('agency/asset/img/icons/quotation-icon.png')}}" alt="">
-                         </div>
-                         <p class="tc-description text-center">
-                              {{ $testimony->client_review }}
-                         </p>
+               <label for="" class="primary-color mt-4" style="font-size:30px">Testimonials</label>
+               <p class="text-muted">Write a good review from your previous client's make your profile  worthy to buyers and potential clients</p>
+               
+               <div class="npi-container testimonial">
+                    <div class="npi-card input-ctn">
+                         <label for="img-upload" class="web-label">
+                              <span><a href="{{ route('agency.testimonial.create') }}">New Testimonial</a></span>
+                         </label>
                     </div>
-                    @endforeach
-               @endif
+
+     
+                    @if ($testimonials)
+                         @foreach ($testimonials as $testimony)
+                         <div class="testimonial-card" id="testimonial-card{{ $testimony->id }}">
+                              <div class="update-ctn">
+                                   <div class="primary-color cursor-p dropdown text-end"><i class="fa fa-ellipsis-h"></i></div>
+                                   <div class="edet-ctn">
+                                   <a href="{{ route('agency.testimonial.edit', $testimony->id) }}"><img width="18px" src="{{asset('agency/asset/img/icons/pen-icon.png')}}" alt=""> &nbsp; Edit Testimonial</a>
+                                   <span class="trash-card" role="button" onclick="confirmDeletion('deleteTestimonial', {'id': {{ $testimony->id }} })"><i class="fa fa-trash"></i> &nbsp; Delete Testimonial</span>
+                                   </div>
+                              </div>
+                              <div class="img-ctn"><img src="{{ asset('storage/uploads/' . $testimony->client_image)}}" alt=""></div>
+                              <h4 class="tc-name">{{ $testimony->client_name }} </h4>
+                              <div class="tc-stars">
+                                   <img src="{{ $testimony->client_rating >= 1 ? asset('agency/asset/img/icons/star-icon-yellow.png') : asset('agency/asset/img/icons/star-icon-gray.png') }}" alt="1 star">
+                                   <img src="{{ $testimony->client_rating >= 2 ? asset('agency/asset/img/icons/star-icon-yellow.png') : asset('agency/asset/img/icons/star-icon-gray.png') }}" alt="2 star">
+                                   <img src="{{ $testimony->client_rating >= 3 ? asset('agency/asset/img/icons/star-icon-yellow.png') : asset('agency/asset/img/icons/star-icon-gray.png') }}" alt="3 star">
+                                   <img src="{{ $testimony->client_rating >= 4 ? asset('agency/asset/img/icons/star-icon-yellow.png') : asset('agency/asset/img/icons/star-icon-gray.png') }}" alt="4 star">
+                                   <img src="{{ $testimony->client_rating >= 5 ? asset('agency/asset/img/icons/star-icon-yellow.png') : asset('agency/asset/img/icons/star-icon-gray.png') }}" alt="5 star">
+                              </div>
+                              <div class="text-center mb-2"><img width="20px" src="{{asset('agency/asset/img/icons/quotation-icon.png')}}" alt="">
+                              </div>
+                              <p class="tc-description text-center">
+                                   {{ $testimony->client_review }}
+                              </p>
+                         </div>
+                         @endforeach
+                    @endif
+               </div>
           </div>
+          {{-- Team  --}}
+          <div class="form-group mb-4">
+               <label for="" class="primary-color mt-4" style="font-size:30px">Team Members</label>
+               <p class="text-muted">Add New team members</p>
+               
+               <div class="npi-container testimonial">
+                    <div class="npi-card input-ctn">
+                         <label for="img-upload" class="web-label">
+                              <span><a href="{{ route('agency.team.create') }}">New Team Member</a></span>
+                         </label>
+                    </div>
+
+                    @if ($teams)
+                         @foreach ($teams as $team)
+                         <div class="testimonial-card" id="team-card{{ $team->id }}">
+                              <div class="update-ctn">
+                                   <div class="primary-color cursor-p dropdown text-end"><i class="fa fa-ellipsis-h"></i></div>
+                                   <div class="edet-ctn">
+                                   <a href="{{ route('agency.team.edit', $team->id) }}"><img width="18px" src="{{asset('agency/asset/img/icons/pen-icon.png')}}" alt=""> &nbsp; Edit Member</a>
+                                   <span class="trash-card" role="button" onclick="confirmDeletion('deleteTeam', {'id': {{ $team->id }} })"><i class="fa fa-trash"></i> &nbsp; Delete Member </span>
+                                   </div>
+                              </div>
+                              <div class="img-ctn mt-5"><img src="{{ asset('storage/uploads/' . $team->team_image)}}" alt=""></div>
+                              <h4 class="tc-name">{{ $team->team_name }} </h4>
+                              <h5 class="text-center">{{ $team->team_position }} </h5>
+                         </div>
+                         @endforeach
+                    @endif
+               </div>
           </div>
 
           {{-- FAQ --}}
@@ -245,3 +311,39 @@
         </div>
       </main>
 </div>
+
+@push('scripts')
+<script>
+  $(document).ready(function(){
+       if($('.summernote').length > 0){
+
+            $('.summernote').summernote({
+                 height: 300, // Set the height of the editor
+                 placeholder: 'Start typing...',
+                 //   fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Merriweather'],
+                 toolbar: [
+                      // Full toolbar options
+                      ['style', ['style']],
+                      ['font', ['bold', 'italic', 'underline', 'clear']],
+                      ['fontname', ['fontname']],
+                      ['fontsize', ['fontsize']],
+                      ['color', ['color']],
+                      ['para', ['ul', 'ol', 'paragraph']],
+                      ['height', ['height']],
+                      ['table', ['table']],
+                      ['insert', ['link', 'picture', 'video', 'hr']],
+                      ['view', ['fullscreen', 'codeview', 'help']],
+                      ['misc', ['undo', 'redo']]
+                 ],
+                 callbacks: {
+                      onChange: function(contents) {
+                           @this.set('about', contents);
+                      }
+                 }
+            });
+
+            
+       }
+  });
+</script>
+@endpush

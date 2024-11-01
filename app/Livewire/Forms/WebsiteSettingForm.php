@@ -12,6 +12,9 @@ class WebsiteSettingForm extends Form
 {
     public $logo;
     public $hero_text;
+    public $property_hero_text;
+    public $realtor_hero_text;
+    public $about;
     public $footer_text;
     public $banner_image;
     public $facebook_link;
@@ -24,6 +27,9 @@ class WebsiteSettingForm extends Form
     public $rules = [
         'logo' => ['image', 'mime:png,jpg,gif,jpeg'],
         'hero_text' => ['required', 'string'],
+        'property_hero_text' => ['required', 'string'],
+        'realtor_hero_text' => ['required', 'string'],
+        'about' => ['required', 'string'],
         'footer_text' => ['required', 'string'],
         'banner_image' => ['image', 'mime:png,jpg,gif,jpeg'],
         'facebook_link' => ['required', 'url'],
@@ -35,6 +41,8 @@ class WebsiteSettingForm extends Form
     public $messages = [
         'logo.image' => 'Please provide a valid image',
         'hero_text.required' => 'Please provide a hero text', 
+        'property_hero_text.required' => 'Please provide a properties hero text', 
+        'realtor_hero_text.required' => 'Please provide a realtors hero text', 
         'footer_text.required' => "Please provide a footer text",
         'banner_image.image' => 'Please provide a valid image',
         'facebook_link.url' => "Please provide a valid url",
@@ -51,6 +59,9 @@ class WebsiteSettingForm extends Form
     public function loadSettings($settings)
     {
         $this->hero_text = @$settings->hero_text;
+        $this->property_hero_text = @$settings->property_hero_text;
+        $this->realtor_hero_text = @$settings->realtor_hero_text;
+        $this->about = @$settings->about;
         $this->footer_text = @$settings->footer_text;
         $this->facebook_link = @$settings->facebook_link;
         $this->instagram_link = @$settings->instagram_link;
@@ -121,6 +132,9 @@ class WebsiteSettingForm extends Form
             $details = json_encode([
                 "logo" => $new_logo,
                 "hero_text" => $this->hero_text,
+                "property_hero_text" => $this->property_hero_text,
+                "realtor_hero_text" => $this->realtor_hero_text,
+                "about" => $this->about,
                 "footer_text" => $this->footer_text,
                 "banner_image" => $new_banner_image,
                 "facebook_link" => $this->facebook_link,

@@ -30,7 +30,7 @@
                                <th>Status</th>
                                <th>Amount</th>
                                <th>Date Listed</th>
-                               <th></th>
+                               <th>Action</th>
                           </thead>
                           <tbody>
                             @if($properties)

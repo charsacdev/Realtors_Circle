@@ -1,7 +1,12 @@
 <?php
 
+use Carbon\Carbon;
 use App\Models\User;
+use App\Mail\AdminSendMail;
+use Illuminate\Support\Facades\DB;
+use App\Mail\BroadcastMessageAdmin;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 
@@ -255,3 +260,203 @@ if(!function_exists('getNotificationUrl'))
         }
     }
 }
+
+
+//Returns the percentage change of this month record compared to last month
+if(!function_exists('percentageChange'))
+{
+    function percentageChange($table, $status = null, $status_column = null, $id = null, $id_column = null)
+    {
+        // Get the current date and the start of this month and last month
+        $thisMonthStart = Carbon::now()->startOfMonth();
+        $lastMonthStart = Carbon::now()->subMonth()->startOfMonth();
+        $lastMonthEnd = Carbon::now()->subMonth()->endOfMonth();
+
+        // Query to get the count of available properties this month
+        if($status == null){
+            if($id == null){
+                $thisMonthCount = DB::table($table)
+                ->whereDate('created_at', '>=', $thisMonthStart)
+                ->count();
+        
+                // Query to get the count of available properties last month
+                $lastMonthCount = DB::table($table)
+                ->whereBetween('created_at', [$lastMonthStart, $lastMonthEnd])
+                ->count();
+            }else{
+                $thisMonthCount = DB::table($table)
+                ->where($id_column, $id)
+                ->whereDate('created_at', '>=', $thisMonthStart)
+                ->count();
+        
+                // Query to get the count of available properties last month
+                $lastMonthCount = DB::table($table)
+                ->where($id_column, $id)
+                ->whereBetween('created_at', [$lastMonthStart, $lastMonthEnd])
+                ->count();
+            } 
+        }else{
+            if($id == null){
+
+                $thisMonthCount = DB::table($table)
+                ->where($status_column, $status)
+                ->whereDate('created_at', '>=', $thisMonthStart)
+                ->count();
+        
+                // Query to get the count of available properties last month
+                $lastMonthCount = DB::table($table)
+                ->where($status_column, $status)
+                ->whereBetween('created_at', [$lastMonthStart, $lastMonthEnd])
+                ->count();
+
+            }else{
+
+                $thisMonthCount = DB::table($table)
+                ->where($status_column, $status)
+                ->where($id_column, $id)
+                ->whereDate('created_at', '>=', $thisMonthStart)
+                ->count();
+        
+                // Query to get the count of available properties last month
+                $lastMonthCount = DB::table($table)
+                ->where($status_column, $status)
+                ->where($id_column, $id)
+                ->whereBetween('created_at', [$lastMonthStart, $lastMonthEnd])
+                ->count();
+
+            }
+            
+            
+        }
+
+
+        // Calculate percentage change
+        if ($lastMonthCount == 0) {
+            $percentageChange = $thisMonthCount > 0 ? 100 : 0;  // Handle division by zero if last month was 0
+        } else {
+            $percentageChange = (($thisMonthCount - $lastMonthCount) / $lastMonthCount) * 100;
+        }
+
+        return $percentageChange;
+    }
+}
+
+
+
+// Function to clean the Summernote content
+if(!function_exists('cleanContent')){
+    function cleanContent($content)
+    {
+        // Check if the content is just "<p><br></p>" and return an empty string if so
+        if (trim($content) === '<p><br></p>') {
+            return '';
+        }
+        return $content;
+    }
+}
+
+//Function to send a mail to a single email
+if(!function_exists('adminSendMail'))
+{
+    function adminSendMail($thisObj, $content, $email, $username, $subject, $company_name = null)
+    {
+        $content = cleanContent($content);
+
+        $thisObj->validate();
+
+        //Check if there's email
+        if($email){
+
+            //Check that the mail was sent
+            try{
+
+                Mail::to($email)->send(new AdminSendMail($username, $content, $subject, $company_name));
+                $thisObj->dispatch('success', ['message' => 'Mail sent successfully!.']);
+                $thisObj->dispatch('resetEditor');
+                $thisObj->reset(['subject', 'channel']);
+                return true;
+
+            }catch(\Exception $e){
+                $thisObj->dispatch('failure', ['message' => 'Mail not sent, please try again.']);
+            }
+
+        }else{
+            $thisObj->dispatch('failure', ['message' => 'No email address found.']);
+        }
+    }
+}
+
+//Function to send a mail to multiple emails
+if(!function_exists('adminSendBroadcastMail'))
+{
+    function adminsendBroadcastMail($thisObj, $message, $subject, $users)
+    {
+        $message = cleanContent($message);
+
+        $thisObj->validate($thisObj->rules, $thisObj->messages);
+
+        if(!empty($users)){
+            try{
+                foreach($users as $user)
+                {
+                    if($user->email){
+                        Mail::to($user->email)->send(new BroadcastMessageAdmin("$user->first_name $user->last_name", $message, $subject));
+                    }
+                }
+        
+                $thisObj->dispatch('success', ['message' => 'Mail sent successfully!.']);
+                $thisObj->dispatch('resetEditor');
+                $thisObj->reset(['subject', 'channel']);
+
+            }catch(\Exception $e){
+
+                $thisObj->dispatch('failure', ['message' => 'Something went wrong, please try again.']);
+            }
+
+           
+        }else{
+            $thisObj->dispatch('failure', ['message' => 'No email found.']);
+        }
+    }
+}
+
+
+// Helper function to get ordinal suffixes (e.g., "1st", "2nd", "3rd", etc.)
+if(!function_exists('getOdinal'))
+{
+    function getOrdinal($number)
+    {
+        $ends = ['th', 'st', 'nd', 'rd', 'th', 'th', 'th', 'th', 'th', 'th'];
+        if ((($number % 100) >= 11) && (($number % 100) <= 13)) {
+            return $number . 'th';
+        }
+        return $number . $ends[$number % 10];
+    }
+}
+
+
+
+//function to generate random 6digit numbers
+if(!function_exists('randomSixDigits'))
+{
+    function randomSixDigits()
+    {
+        // Generate an array of numbers from 1 to 100
+        $numbers = range(0, 9);
+
+        // Shuffle the array to randomize the order
+        shuffle($numbers);
+
+        // Get the first 6 unique numbers
+        $randomNumbers = array_slice($numbers, 0, 6);
+
+        // Convert the array of numbers to a single string
+        $randomString = implode('', $randomNumbers);
+
+        // Output the random string
+        return $randomString;
+    }
+}
+
+        
+

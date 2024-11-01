@@ -164,10 +164,13 @@
                      <a class="nav-link {{ Request::segment(2)==="properties" || Request::segment(2)==="create-properties" || Request::segment(2)==="edit-properties" ? 'active' : '' }}" href="/agency/properties">Properties</a>
                    </li>
                    <li class="nav-item">
-                     <a class="nav-link getstarted-btn {{ Request::segment(2)==="realtors" || Request::segment(2)==="create-realtors" || Request::segment(2)==="realtors-application" || Request::segment(2)==="realtors-schedule-meeting"  ? 'active' : '' }}" href="/agency/realtors">Realtors</a>
+                     <a class="nav-link getstarted-btn {{ Request::segment(2)==="realtors" || Request::segment(2)==="create-realtors" || Request::segment(2)==="realtors-application" || Request::segment(2)==="realtor-profile-details" || Request::segment(2)==="realtors-schedule-meeting"  ? 'active' : '' }}" href="/agency/realtors">Realtors</a>
                    </li>
                    <li class="nav-item">
                      <a class="nav-link getstarted-btn {{ Request::segment(2)==="customers" || Request::segment(2)==="customers-details" ? 'active' : '' }}" href="/agency/customers">Customers</a>
+                   </li>
+                   <li class="nav-item">
+                     <a class="nav-link getstarted-btn {{ Request::segment(2)==="contact-message" || Request::segment(2)==="contact-message-details" ? 'active' : '' }}" href="/agency/contact-message">Contact Message</a>
                    </li>
                    <li class="nav-item">
                      <a class="nav-link getstarted-btn {{ Request::segment(2)==="website-settings" || Request::segment(2)==="create-colorplates" || Request::segment(2)==="create-testimonial" || Request::segment(2)==="create-faq" ? 'active' : '' }}" href="/agency/website-settings">Website</a>
@@ -287,6 +290,12 @@
                 if (parent_container) {
                     parent_container.remove(); 
                 }
+              }else if(src == 'team'){
+                parent_container = document.querySelector('#team-card' + id);
+
+                if (parent_container) {
+                    parent_container.remove(); 
+                }
               }
 
               var successBag = document.getElementById('successBag');
@@ -307,6 +316,11 @@
           Livewire.on('markallread', () => {
             var notification = $('.notification-title');
             notification.addClass('read');
+          });
+
+          ////////////////////////// Listen for reset Editor event /////////////////////////////////
+          Livewire.on('resetEditor', () => {
+            $('.summernote').summernote('reset');  // Clears all content and formatting in the editor
           });
 
 
@@ -356,6 +370,15 @@
               {
                 Livewire.dispatch('markread', {notification_id : data['id']})
               }
+
+              //Mark a notification read
+              function updateStatus(id, redirectUrl)
+                { 
+                  Livewire.dispatch('update-status', {id : id})
+                  setTimeout(() => {
+                    location.href = redirectUrl
+                  }, 5000);
+                }
 
         </script>
 
@@ -504,14 +527,8 @@
                     $('.edet-ctn').removeClass('active');
                 })
 
-
-
-                  
-                  
-                  
-
-
-               });
+          });
       </script>
+    @stack('scripts')
     </body>
 </html>

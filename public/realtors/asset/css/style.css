@@ -1832,6 +1832,10 @@ section#realtor-sec{
     width: 25px;
 }
 
+.rtr-card .socials .items .d-flex .svg-inline--fa{
+    color: #000000!important;
+}
+
 .rtr-card .socials .items span{
     font-size: 14px;
     opacity: .9;
@@ -2622,5 +2626,89 @@ footer#rcm-footer .socials img{
   .alert{
     text-align: center;
   }
+
+  .ag_ret_card{
+    /* background-color: var(--white-color); */
+    padding: 10px;
+    height: 100%;
+    padding-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    border-radius: 10px;
+    box-shadow: var(--box-shadow);
+  }
+
+  .ag_ret_card .us_rl span{
+    padding: 3px 7px;
+    border-radius: 3px;
+    background: var(--green-40);
+    font-size: 12px;
+    color: white;
+  }
+
+  .ag_ret_card .logo-container
+  {
+    overflow: hidden;
+    height: 150px;
+    margin-bottom: 10px;
+  }
+
+
+  @media (min-width: 400px) and (max-width: 500px) {
+    .ag_ret_card .logo-container{
+        height: 200px;
+    }
+  }
+
+  .ag_ret_card .logo-container img{
+    height: 100%;
+    width: auto;
+  }
+
+  .ag_ret_card .com_nam{
+    font-weight: bolder;
+    font-family: var(--font-family-bold);
+  }
+
+  .ag_ret_card .com_loc{
+    display: block;
+    margin-bottom: 10px;
+    font-family: var(--font-family-regular);
+  }
+
+  .custom-search-container{
+    position: relative;
+    width: 100%;
+    height: 45px;
+    border-radius: 5px;
+  }
+
+  .custom-search-container input{
+    height: 100%!important;
+    position: absolute;
+    width: 100%!important;
+    padding-right: 60px!important;
+  }
+
+  .custom-search-container .new-discussion-btn{
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+
+  nav[role="navigation"]{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 50vw!important;
+}
+
+
+
+
+
 
 

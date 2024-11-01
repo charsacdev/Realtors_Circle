@@ -118,7 +118,7 @@ ul{
 }
 
 .primary-color{
-    color: var(--primary-color)!important;
+    color: var(--primary-green)!important;
 }
 
 .harmburger-menu{
@@ -2851,6 +2851,12 @@ input[type="text"]:focus-within{
     background-color:#007CFE ;
 }
 
+.new-discussion-btn.outline-success{
+    background: transparent;
+    color: var(--primary-green);
+    border: 1px solid var(--primary-green);
+}
+
 .outline-blue{
     background-color: white;
     border: 1px solid #007CFE;
@@ -4050,7 +4056,319 @@ ol{
   }
 
 
+  .rea-app-img{
+    width: 80px;
+    height: 80px;
+    border-radius: 50px;
+    overflow: hidden;
+}
 
+.rea-app-img img{
+    width: 100%;
+    height: auto;
+}
+
+
+.share-link-ctn .custom-tooltip,
+.referral-code-ctn .custom-tooltip{
+    position: absolute;
+    padding: 5px 10px;
+    border-radius: 7px;
+    background-color: black;
+    color: white;
+    text-align: center;
+    right: -200px;
+    top: -50px;
+    transition: all .5s ease;
+}
+
+.referral-code-ctn .custom-tooltip{
+    display: none;
+    right: 0!important;
+}
+
+.share-link-ctn .custom-tooltip::after,
+.referral-code-ctn .custom-tooltip::after{
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -10px;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 15px solid black;
+    transition: all .5s ease;
+}
+
+
+.custom-input-group{
+    width: 100%;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    min-height: 40px;
+    height: 40px;
+    position: relative;
+}
+
+.custom-input-group input,
+.custom-input-group input:focus,
+.custom-input-group input:focus-within,
+.custom-input-group input:focus-visible
+{
+    width: 100%;
+    height: 100%!important;
+    border: 0;
+    outline: 0;
+    padding-left: 10px;
+    padding-right: 40px;
+    overflow: hidden;
+    border-radius: inherit;
+}
+
+.custom-input-group img,
+.custom-input-group .custom-tooltip{
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    cursor: pointer;
+    transform: translateY(-50%);
+}
+
+.npi-container{
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    overflow-y: hidden;
+    overflow-x: scroll;
+    height: 230px;
+}
+
+.npi-container::-webkit-scrollbar {
+    width: 1px;
+    height: 6px;
+    cursor: all-scroll;
+  }
+  .npi-container::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+    border-radius: 10px;
+  }
+  .npi-container::-webkit-scrollbar-thumb {
+    background: var(--primary-green);
+    border-radius: 10px;
+    cursor: grab;
+  }
+
+
+.npi-card{
+    width: 280px;
+    min-width: 280px;
+    height: 200px;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+}
+
+.npi-card img.bg-prop{
+    width: 100%;
+    height: auto;
+    position: relative;
+}
+
+.npi-card .trash-prop{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    z-index: 2;
+    background-color: #ffffffb4;
+    border: 1px solid var(--white-color);
+    border-radius: 7px;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.npi-card .trash-prop img{
+    width: 20px;
+}
+
+.npi-card.input-ctn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #cccccc;
+}
+
+.npi-card.input-ctn .label-container{
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+.testimonial-card{
+    padding: 10px;
+    background: var(--off-white-60);
+    height: 300px;
+    width: 300px;
+    min-width: 300px;
+    border: 1px solid #ccc;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    position: relative;
+}
+
+.testimonial-card .img-ctn{
+    width: 80px;
+    height: 80px;
+    overflow: hidden;
+    border-radius: 100px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.testimonial-card .img-ctn img{
+    width: 100%;
+}
+
+.testimonial-card .tc-name{
+    margin-top: 10px;
+    text-align: center;
+    color: var(--primary-blue);
+    font-size: 20px;
+    font-family: var(--font-family-bold);
+}
+
+.testimonial-card .tc-stars{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.testimonial-card .tc-stars img{
+    max-width: 20px;
+}
+
+.testimonial-card .tc-description{
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 14px;
+    font-weight: bolder;
+}
+
+.npi-container.testimonial{
+    height: 320px;
+}
+
+.npi-container.testimonial .npi-card{
+    border-radius: 0;
+    height: 300px;
+    overflow: hidden;
+}
+
+.testimonial-card .update-ctn,
+.faq-container .qua-container .question .update-ctn
+{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
+.testimonial-card .edet-ctn,
+.faq-container .qua-container .question .edet-ctn
+{
+    display: inline-block;
+    width: 195px;
+    padding: 10px;
+    border-radius: 5px;
+    background: var(--white-color);
+    position: absolute;
+    right: -500px;
+    top: 20px;
+    transition: all 0.5s ease-in-out;
+    z-index: 22;
+}
+
+.testimonial-card .edet-ctn a,
+.testimonial-card .edet-ctn span,
+.faq-container .qua-container .question .edet-ctn a,
+.faq-container .qua-container .question .edet-ctn span
+{
+    display: block;
+    cursor: pointer;
+    padding: 10px;
+    font-size: 14px;
+    font-family: var(--font-family-semi-bold);
+}
+
+b, strong{
+    font-style: bold!important;
+}
+
+.error{
+    font-size: 13px;
+    color: orangered;
+}
+
+
+
+
+
+.custom-date-input {
+    position: relative;
+    width: 150px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: inherit;
+    color: #999; /* Placeholder color */
+}
+
+.custom-date-input::placeholder {
+    color: #999;
+    font-size: 14px;
+}
+
+.custom-date-input::-webkit-calendar-picker-indicator {
+    display: none; /* Remove the default icon */
+}
+
+.custom-date-input:hover,
+.custom-date-input:focus {
+    border-color: #007bff;
+    color: #333; /* Normal color after selecting a date */
+}
+
+#chart-container{
+    position: relative;
+}
+
+#chart-container .loading-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    z-index: 20;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+}
 
 
 

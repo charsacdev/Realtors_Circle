@@ -1,5 +1,5 @@
 @extends('admin.dashboardheader') 
     @section('title', 'Agency Details')
     @section('content-dashboard')
-        @livewire('admin.agency-details')
+        @livewire('admin.agency-details', ['slug' => $slug])
     @endsection

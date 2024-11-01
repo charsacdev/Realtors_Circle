@@ -58,7 +58,7 @@
                                             <td>
                                                 {{ formatDate($schedule->date_booked) }}
                                             </td>
-                                            <td>{{ $schedule->reason }}</td>
+                                            <td>{{ Str::limit($schedule->reason, 50, '...') }}</td>
                                             <td class="cursor-p" data-bs-toggle="modal" data-bs-target="#appModal{{ $schedule->id }}"><i class="fa fa-ellipsis-h"></i></td>
                                         </tr>
                                     @endforeach

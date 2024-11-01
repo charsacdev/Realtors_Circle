@@ -2,14 +2,15 @@
 
 namespace App\Livewire\Agency;
 
-use App\Livewire\Forms\WebsiteSettingForm;
 use App\Models\Faq;
+use App\Models\Team;
 use Livewire\Component;
 use App\Models\Testimonial;
 use Livewire\Attributes\On;
+use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
-use Livewire\WithFileUploads;
+use App\Livewire\Forms\WebsiteSettingForm;
 
 class WebsiteSettings extends Component
 {
@@ -17,6 +18,7 @@ class WebsiteSettings extends Component
     
     public $user;
     public $testimonials;
+    public $teams;
     public $colorPalettes;
     public $faqs;
     public $settings; 
@@ -24,6 +26,7 @@ class WebsiteSettings extends Component
 
     public $new_logo;
     public $new_banner_image;
+    public $about;
 
 
     public function mount()
@@ -33,6 +36,9 @@ class WebsiteSettings extends Component
         //Load user testimonials
         $this->testimonials = $this->user->testimonials;
 
+        //Load user teams
+        $this->teams = $this->user->teams;
+
         //Load user faqs 
         $this->faqs = $this->user->faqs;
 
@@ -41,8 +47,10 @@ class WebsiteSettings extends Component
 
         //Load user website settings
         $this->settings = json_decode(@$this->user->settings->settings);
-
+        
         $this->form->loadSettings($this->settings);
+
+        $this->about = $this->form->about;
   
     }
 
@@ -51,6 +59,7 @@ class WebsiteSettings extends Component
     {
         $this->form->logo = $this->new_logo;
         $this->form->banner_image = $this->new_banner_image;
+        $this->form->about = $this->about;
 
         if($this->form->store($this->settings))
         {
@@ -80,7 +89,7 @@ class WebsiteSettings extends Component
             $this->dispatch('deleted', [
                 'message' => 'Testimonial deleted successfully!', 
                 'id' => $testimonial->id,
-                'src' => "testimonial", // Element id that needs to be removed on the frontend
+                'src' => "testimonial", 
             ]);
 
         }else{
@@ -106,7 +115,33 @@ class WebsiteSettings extends Component
             $this->dispatch('deleted', [
                 'message' => 'FAQ deleted successfully!', 
                 'id' => $faq->id,
-                'src' => "faq", // Element id that needs to be removed on the frontend
+                'src' => "faq", 
+            ]);
+
+        }else{
+            $this->dispatch('failure', ['message' => 'Something went wrong, please try again.']);
+        } 
+        
+    }
+
+    // Listen for the 'deleteTeam' event
+    #[On('deleteTeam')]
+    public function deleteTeam($source_id)
+    {
+        $team = Team::findOrFail($source_id);
+
+        if(auth('web')->user()->id != $team->user_id)
+        {
+            abort(403);
+        }
+
+        if($team->delete())
+        {
+            //dispatching a deleted event
+            $this->dispatch('deleted', [
+                'message' => 'Team member deleted successfully!', 
+                'id' => $team->id,
+                'src' => "team", 
             ]);
 
         }else{

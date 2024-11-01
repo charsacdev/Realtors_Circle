@@ -16,6 +16,7 @@ class RoleMiddleware
      */
     public function handle(Request $request, Closure $next, $role): Response
     {
+
         $user = Auth::user(); // Get the authenticated user
 
         // Check if the user is authenticated and their role matches the expected role
