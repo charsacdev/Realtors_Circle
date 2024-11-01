@@ -19,27 +19,43 @@
                     </div>
                   </div>
                   <div class="col-md-7 col-lg-8">
-                    <form action="" class="reg-form">
+                    <form wire:submit="login" method="POST" class="reg-form">
+                      @csrf
                         <br>
                       <h3 class="form-title">Log In</h3>
-                    
-                      <div class="form-group mb-5">
-                        <input type="text" class="w-100" name="" placeholder="Email Address" id="">
+                      @if($errorMessage)
+                          <div class="alert alert-danger">
+                        {{ $errorMessage }}</i>
                       </div>
-                      <div class="input-group i-group-div mb-3">
-                            <input type="password" name="password" class="form-control shadow-none psw_input" placeholder="Password">
+                      @endif
+                      <div class="form-group">
+                        <input type="text" class="w-100" name="email" wire:model="form.email" placeholder="Email Address" id="">
+                        <div class="mb-3">
+                          @error('form.email') <span class="error">{{ $message }}</span> @enderror
+                        </div>
+                      </div>
+                      <div class="input-group i-group-div">
+                            <input type="password" name="password" wire:model="form.password" class="form-control shadow-none psw_input" placeholder="Password">
                             <div class="input-group-text rlf-hd">
                                 <span class="d-none rlf-hd-show"><i class="fa fa-eye"></i></span>
                                 <span class="rlf-hd-hide"><i class="fa fa-eye-slash"></i></span>
                           </div>
                       </div>
+                      <div class="mb-3">
+                        @error('form.password') <span class="error">{{ $message }}</span> @enderror
+                      </div>
       
                       <a href="forgotpassword" class="text-dark">Forgot Password?</a>
                       <div class="mb-5 mt-3 text-end">
-                        <span>Don't have account? </span> <a href="signup" id="load-signup" class="primary-text">Sign up</a>
+                        <span>Don't have account? </span> <a href="signup" wire:navigate id="load-signup" class="primary-text">Sign up</a>
                       </div>
                       <div class="text-end">
-                        <button class="primary-btn btn-rounded">Contine</button>
+                        <button class="primary-btn btn-rounded">
+                          Contine &nbsp;
+                          <span wire:loading>
+                            <i class="fa fa-spinner fa-spin"></i>
+                          </span>
+                        </button>
                       </div>
                     </form>
                   </div>
@@ -50,7 +66,5 @@
             </div>
           </div>
         </main>
-    
       </div>
-    
 </div>

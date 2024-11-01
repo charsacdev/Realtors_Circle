@@ -48,12 +48,22 @@
                    <input type="text" name="" min="0" id="" class="form-control">
                  </div>
                </div>
-               <div class="col-12 mb-4">
-                 <div class="form-group">
-                   <h6>Location (Map embed code)</h6>
-                   <input type="text" name="" min="0" id="" class="form-control">
-                 </div>
-               </div>
+               <div class="col-sm-7 col-lg-8 mb-4">
+                <div class="form-group">
+                  <h6>Location (Map embed code)</h6>
+                  <input type="text" name="" min="0" id="" class="form-control">
+                </div>
+              </div>
+              <div class="col-sm-5 col-lg-4 mb-4">
+                <div class="form-group">
+                  <h6>Status</h6>
+                  <select name="status" class="form-control" id="">
+                    <option value="">Select</option>
+                    <option value="1">Available</option>
+                    <option value="0">Unavailable</option>
+                  </select>
+                </div>
+              </div>
                <div class="col-12 mb-4">
                  <div class="form-group">
                    <h6>Property Overview</h6>
@@ -81,7 +91,25 @@
                    </select>
                  </div>
                </div>
-               <div class="col-sm-6 col-lg-12 mb-4">
+               <div class="col-sm-6 mb-4">
+                 <div class="form-group">
+                   <h6>Bedroom (if building)</h6>
+                   <input type="text" name="" min="0" id="" class="form-control">
+                 </div>
+               </div>
+               <div class="col-sm-6 mb-4">
+                 <div class="form-group">
+                   <h6>Bathroom (if building)</h6>
+                   <input type="text" name="" min="0" id="" class="form-control">
+                 </div>
+               </div>
+               <div class="col-sm-6 mb-4">
+                 <div class="form-group">
+                   <h6>Squarefoot</h6>
+                   <input type="text" name="" min="0" id="" class="form-control">
+                 </div>
+               </div>
+               <div class="col-sm-6 mb-4">
                  <div class="form-group">
                    <h6>Payment Mode</h6>
                    <select name="" id="" class="form-control">

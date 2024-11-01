@@ -7,8 +7,8 @@ $(document).ready(function(){
      var yearlyLabel = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
 
-     barChart(realtorData, propertyData, yearlyLabel, 'dsbChart', 'Customers', 'Properties');
-     lineChart(realtorData, yearlyLabel, 'InsightChart');
+     // barChart(realtorData, propertyData, yearlyLabel, 'dsbChart', 'Customers', 'Properties');
+     // lineChart(realtorData, yearlyLabel, 'InsightChart');
 
     
      

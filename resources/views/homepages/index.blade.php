@@ -1,4 +1,14 @@
-
+@php
+  $users = \App\Models\User::whereNot('role', 'admin')
+            ->whereNotNull('email_verified_at')
+            ->where(function ($subquery){
+                $subquery->whereNotNull('company_name')
+                ->orWhereNotNull('first_name');
+            })->inRandomOrder()
+            ->paginate(8);
+@endphp
+    
+    
     @extends('homepages.header') 
     @section('contents')
      <div class="hero" style="background-image: url('realtors/asset/img/bg-img-4.png');" data-aos="fade-up" data-aos-delay="500">
@@ -136,14 +146,78 @@
               <h2 class="section-sub-title lg text-center">Connect with Both Realtors and Real Estate Agency on our Platform</h2>
               <p class="text-capitalize fs-16 mb-4 text-center">Realtors circle brings together profound solutions to realtors and real estate agency to help make more informed decesion in the real estate sector - all in one place.</p>
               <div class="d-flex align-items-center justify-content-center gap-3 gap-sm-5 flex-wrap">
-                <a href="#" data-bs-toggle="modal" data-bs-target="#contactModal" class="primary-btn btn-rounded mt-4">Join WaitList</a>
-                <a href="signup" class="primary-btn-gray btn-rounded mt-4 d-none">Sign Up as an User</a>
+                {{-- <a href="#" data-bs-toggle="modal" data-bs-target="#contactModal" class="primary-btn btn-rounded mt-4">Join WaitList</a> --}}
+                {{-- <a href="signup" class="primary-btn-gray btn-rounded mt-4 d-none">Sign Up as an User</a> --}}
               </div>
             </div>
             <div class="col-md-1 col-lg-2"></div>
           </div>
+          <div class="row align-items-stretch">
+            <div class="col-12">
+              <div class="text-end my-3">
+                <a href="{{ route('agency-and-realtor') }}" class="new-discussuccess primary-text" style="font-size: 20px">See all</a>
+              </div>
+            </div>
+            @if($users)
+                @foreach ($users as $user)
+                    @if ($user->role != 'admin')
+                    
+                        @php
+                            $role = $user->role;
+                            if($role == 'agency'){
+                                $settings = json_decode(@$user->settings->settings);
+                                $logo = @$settings->logo;
+                            }
+                            
+                        @endphp
+                        <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
+                        <div class="ag_ret_card">
+                            <div class="logo-container">
+                            @if ($role == 'realtor')
+                                @unless ($user->profile_image)
+                                    <img src="{{ asset('agency-dashboard/asset/img/user-img.png') }}" class="w-100 img-fluid" alt="">
+                                @else
+                                    <img src='{{ asset("storage/uploads/$user->profile_image") }}' class="w-100 img-fluid" alt="">
+                                    
+                                @endunless
+                            @else
+                                @unless ($logo)
+                                <img src="{{ asset('agency-dashboard/asset/img/default_logo.png') }}" class="w-100 img-fluid" alt="">
+                                @else
+                                <img src='{{ asset("storage/uploads/$logo") }}' class="w-100 img-fluid" alt="">
+                                @endunless
+                            @endif
+                            </div>
+                            <div class="d-flex flex-column justify-content-between flex-grow-1">
+                            <h5 class="com_nam">
+                                @if ($role == 'agency')
+                                    {{ $user->company_name }}
+                                @else
+                                    {{ "$user->first_name $user->last_name" }}
+                                @endif
+                            </h5>
+                            <div class="us_rl mb-2">
+                                <span>{{ Str::title($user->role) }}</span>
+                            </div>
+                            <small class="com_loc">
+                                {{ "$user->city, $user->state" }}
+                            </small>
+                            @if($role == 'realtor')
+                                <a href="{{ route('realtor.profile-information', $user->slug) }}" class="new-discussion-btn btn-success">Visit Profile Page</a>
+                            @else
+                                <a href="{{ route('agency-home', $user->slug) }}" class="new-discussion-btn btn-success">Visit Web Page</a>
+                            @endif
+                            </div>
+                        </div>
+                        </div>
+                    @endif
+                @endforeach
+            @endif
+          </div>
         </div>
       </section>
+
+
 
      @endsection
      

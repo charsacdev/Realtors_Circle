@@ -77,29 +77,6 @@ $(document).ready(function () {
 
   }
 
-
-    if($('.summernote').length > 0){
-
-    $('.summernote').summernote({
-      height: 300, // Set the height of the editor
-      placeholder: 'Start typing...',
-      toolbar: [
-        // Full toolbar options
-        ['style', ['style']],
-        ['font', ['bold', 'italic', 'underline', 'clear']],
-        ['fontname', ['fontname']],
-        ['fontsize', ['fontsize']],
-        ['color', ['color']],
-        ['para', ['ul', 'ol', 'paragraph']],
-        ['height', ['height']],
-        ['table', ['table']],
-        ['insert', ['link', 'picture', 'video', 'hr']],
-        ['view', ['fullscreen', 'codeview', 'help']],
-        ['misc', ['undo', 'redo']]
-    ]
-    });
-  }
-
   /********************************* DataTables ***************************************/
   //example 1
   var table = $('#example').DataTable({
@@ -188,8 +165,53 @@ $(document).ready(function () {
 
   });
 
+  
 
-  var table = $('#livelearn-table').DataTable({
+  var table = $('#user-table').DataTable({
+    searching: true,
+    paging: true,
+    select: true,
+    lengthChange: false,
+    language: {
+      paginate: {
+        next: '<i class="fa fa-angle-double-right" aria-hidden="true"></i>',
+        previous: '<i class="fa fa-angle-double-left" aria-hidden="true"></i>'
+      }
+    }
+
+  });
+  
+
+  var table = $('#dashboard-table').DataTable({
+    searching: false,
+    paging: false,
+    select: false,
+    lengthChange: false,
+    language: {
+      paginate: {
+        next: '<i class="fa fa-angle-double-right" aria-hidden="true"></i>',
+        previous: '<i class="fa fa-angle-double-left" aria-hidden="true"></i>'
+      }
+    }
+
+  });
+  
+
+  var table = $('#contact-table').DataTable({
+    searching: true,
+    paging: true,
+    select: true,
+    lengthChange: false,
+    language: {
+      paginate: {
+        next: '<i class="fa fa-angle-double-right" aria-hidden="true"></i>',
+        previous: '<i class="fa fa-angle-double-left" aria-hidden="true"></i>'
+      }
+    }
+
+  });
+
+  var table = $('#agency-table').DataTable({
     searching: true,
     paging: true,
     select: true,

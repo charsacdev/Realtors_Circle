@@ -5,9 +5,13 @@ $(document).ready(function(){
      var realtorData = [400, 800, 200, 900, 600, 700, 100, 500, 500, 400, 300, 300];
      var propertyData = [200, 1000, 700, 500, 200, 500, 300, 800, 600, 300, 700, 500];
      var yearlyLabel = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+     // var monthlyLabel = ["1st", "2nd", "3rd", ...];
+     // var weeklyLabel = ["day 1", "day 2", "day 3", ... ];
+     // var dailyLabel = ["12:00AM", "1:00AM", "2:00AM", ... ];
 
 
-     barChart(realtorData, propertyData, yearlyLabel, 'dsbChart', 'Realtors', 'Properties');
+
+     // barChart(realtorData, propertyData, yearlyLabel, 'dsbChart', 'Realtors', 'Properties');
 
     
      

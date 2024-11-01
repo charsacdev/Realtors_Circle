@@ -28,205 +28,42 @@
                                    <th>Phone Number</th>
                                    <th>Date Booked</th>
                                    <th>Reason</th>
-                                   <th></th>
+                                   <th>Action</th>
                               </thead>
                              <tbody>
-                              <tr>
-                                  <td>
-                                      <div
-                                        class="d-flex align-items-center justify-content-start gap-2">
-                                        <div
-                                            class="custom-control custom-checkbox ms-2 d-inline">
-                                            <input type="checkbox"
-                                                class="custom-control-input"
-                                                id="customCheckBox2" required="">
-                                            <label class="custom-control-label"
-                                                for="customCheckBox2"></label>
+                                @if($bookings)
+                                @foreach ($bookings as $booking)
+                                    <tr>
+                                        <td>
+                                            <div
+                                            class="d-flex align-items-center justify-content-start gap-2">
+                                            <div
+                                                class="custom-control custom-checkbox ms-2 d-inline">
+                                                <input type="checkbox"
+                                                    class="custom-control-input"
+                                                    id="customCheckBox2" required="">
+                                                <label class="custom-control-label"
+                                                    for="customCheckBox2"></label>
+                                            </div>
+                                            <div class="apt_nit success">
+                                                <span>{{ getFirstLetter($booking->first_name) }}</span>
+                                                </div>
+                                            <div class="apt_ful">
+                                                {{ "$booking->first_name $booking->last_name" }}
+                                            </div>
                                         </div>
-                                        <div class="apt_nit success">
-                                          <span>J</span>
-                                          </div>
-                                        <div class="apt_ful">
-                                         John Doe Williams
-                                        </div>
-                                    </div>
-                                   </td>
-                                   <td>johndoewilliams@gmail.com</td>
-                                   <td>+234839483723</td>
-                                   <td>
-                                      May 1st, 2024 10:00AM
-                                   </td>
-                                   <td>Land location and estimate</td>
-                                   <td class="cursor-p" data-bs-toggle="modal" data-bs-target="#appModal"><i class="fa fa-ellipsis-h"></i></td>
-                              </tr>
-                              <tr>
-                                  <td>
-                                      <div
-                                        class="d-flex align-items-center justify-content-start gap-2">
-                                        <div
-                                            class="custom-control custom-checkbox ms-2 d-inline">
-                                            <input type="checkbox"
-                                                class="custom-control-input"
-                                                id="customCheckBox2" required="">
-                                            <label class="custom-control-label"
-                                                for="customCheckBox2"></label>
-                                        </div>
-                                        <div class="apt_nit success">
-                                          <span>J</span>
-                                          </div>
-                                        <div class="apt_ful">
-                                         John Doe Williams
-                                        </div>
-                                    </div>
-                                   </td>
-                                   <td>johndoewilliams@gmail.com</td>
-                                   <td>+234839483723</td>
-                                   <td>
-                                      May 1st, 2024 10:00AM
-                                   </td>
-                                   <td>Land location and estimate</td>
-                                   <td class="cursor-p" data-bs-toggle="modal" data-bs-target="#appModal"><i class="fa fa-ellipsis-h"></i></td>
-                              </tr>
-                              <tr>
-                                  <td>
-                                      <div
-                                        class="d-flex align-items-center justify-content-start gap-2">
-                                        <div
-                                            class="custom-control custom-checkbox ms-2 d-inline">
-                                            <input type="checkbox"
-                                                class="custom-control-input"
-                                                id="customCheckBox2" required="">
-                                            <label class="custom-control-label"
-                                                for="customCheckBox2"></label>
-                                        </div>
-                                        <div class="apt_nit success">
-                                          <span>J</span>
-                                          </div>
-                                        <div class="apt_ful">
-                                         John Doe Williams
-                                        </div>
-                                    </div>
-                                   </td>
-                                   <td>johndoewilliams@gmail.com</td>
-                                   <td>+234839483723</td>
-                                   <td>
-                                      May 1st, 2024 10:00AM
-                                   </td>
-                                   <td>Land location and estimate</td>
-                                   <td class="cursor-p" data-bs-toggle="modal" data-bs-target="#appModal"><i class="fa fa-ellipsis-h"></i></td>
-                              </tr>
-                              <tr>
-                                  <td>
-                                      <div
-                                        class="d-flex align-items-center justify-content-start gap-2">
-                                        <div
-                                            class="custom-control custom-checkbox ms-2 d-inline">
-                                            <input type="checkbox"
-                                                class="custom-control-input"
-                                                id="customCheckBox2" required="">
-                                            <label class="custom-control-label"
-                                                for="customCheckBox2"></label>
-                                        </div>
-                                        <div class="apt_nit success">
-                                          <span>J</span>
-                                          </div>
-                                        <div class="apt_ful">
-                                         John Doe Williams
-                                        </div>
-                                    </div>
-                                   </td>
-                                   <td>johndoewilliams@gmail.com</td>
-                                   <td>+234839483723</td>
-                                   <td>
-                                      May 1st, 2024 10:00AM
-                                   </td>
-                                   <td>Land location and estimate</td>
-                                   <td class="cursor-p" data-bs-toggle="modal" data-bs-target="#appModal"><i class="fa fa-ellipsis-h"></i></td>
-                              </tr>
-                              <tr>
-                                  <td>
-                                      <div
-                                        class="d-flex align-items-center justify-content-start gap-2">
-                                        <div
-                                            class="custom-control custom-checkbox ms-2 d-inline">
-                                            <input type="checkbox"
-                                                class="custom-control-input"
-                                                id="customCheckBox2" required="">
-                                            <label class="custom-control-label"
-                                                for="customCheckBox2"></label>
-                                        </div>
-                                        <div class="apt_nit success">
-                                          <span>J</span>
-                                          </div>
-                                        <div class="apt_ful">
-                                         John Doe Williams
-                                        </div>
-                                    </div>
-                                   </td>
-                                   <td>johndoewilliams@gmail.com</td>
-                                   <td>+234839483723</td>
-                                   <td>
-                                      May 1st, 2024 10:00AM
-                                   </td>
-                                   <td>Land location and estimate</td>
-                                   <td class="cursor-p" data-bs-toggle="modal" data-bs-target="#appModal"><i class="fa fa-ellipsis-h"></i></td>
-                              </tr>
-                              <tr>
-                                  <td>
-                                      <div
-                                        class="d-flex align-items-center justify-content-start gap-2">
-                                        <div
-                                            class="custom-control custom-checkbox ms-2 d-inline">
-                                            <input type="checkbox"
-                                                class="custom-control-input"
-                                                id="customCheckBox2" required="">
-                                            <label class="custom-control-label"
-                                                for="customCheckBox2"></label>
-                                        </div>
-                                        <div class="apt_nit success">
-                                          <span>J</span>
-                                          </div>
-                                        <div class="apt_ful">
-                                         John Doe Williams
-                                        </div>
-                                    </div>
-                                   </td>
-                                   <td>johndoewilliams@gmail.com</td>
-                                   <td>+234839483723</td>
-                                   <td>
-                                      May 1st, 2024 10:00AM
-                                   </td>
-                                   <td>Land location and estimate</td>
-                                   <td class="cursor-p" data-bs-toggle="modal" data-bs-target="#appModal"><i class="fa fa-ellipsis-h"></i></td>
-                              </tr>
-                              <tr>
-                                  <td>
-                                      <div
-                                        class="d-flex align-items-center justify-content-start gap-2">
-                                        <div
-                                            class="custom-control custom-checkbox ms-2 d-inline">
-                                            <input type="checkbox"
-                                                class="custom-control-input"
-                                                id="customCheckBox2" required="">
-                                            <label class="custom-control-label"
-                                                for="customCheckBox2"></label>
-                                        </div>
-                                        <div class="apt_nit success">
-                                          <span>J</span>
-                                          </div>
-                                        <div class="apt_ful">
-                                         John Doe Williams
-                                        </div>
-                                    </div>
-                                   </td>
-                                   <td>johndoewilliams@gmail.com</td>
-                                   <td>+234839483723</td>
-                                   <td>
-                                      May 1st, 2024 10:00AM
-                                   </td>
-                                   <td>Land location and estimate</td>
-                                   <td class="cursor-p" data-bs-toggle="modal" data-bs-target="#appModal"><i class="fa fa-ellipsis-h"></i></td>
-                              </tr>
+                                        </td>
+                                        <td> {{ $booking->email }}</td>
+                                        <td> {{ $booking->phone_number }}</td>
+                                        <td>
+                                            {{ formatDate($booking->date_booked) }}
+                                        </td>
+                                        <td>{{ $booking->reason }}</td>
+                                        <td class="cursor-p" data-bs-toggle="modal" data-bs-target="#appModal{{ $booking->id }}"><i class="fa fa-ellipsis-h"></i></td>
+                                    </tr>
+                                @endforeach
+                            @endif
+
                              </tbody>
                          </table>
                     </div>
@@ -235,21 +72,25 @@
         </div>
       </main>
 
-      <div class="modal fade" id="appModal" tabindex="-1" aria-labelledby="appModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-sm modal-dialog-centered">
-             <div class="modal-content">
-                  <div class="modal-body rounded">
-                    <div class="d-flex align-items-center justify-content-center mb-2 mt-3">
-                         <div class="rea-app-img">
-                              <img src="{{asset('realtor-dashboard/asset/img/user-img.png')}}"  alt="icon">
-                         </div>
-                    </div>
-                       <h3 class="text-center mb-4">John Doe</h3>
-                        <a href="/agency/message-inquiry" class="new-discussion-btn btn-success d-block w-100 mb-3">View</a>
-                        <button data-bs-dismiss="modal" class="new-discussion-btn w-100 d-block outline-success text-dark">Back</button>
+      @if($bookings)
+      @foreach ($bookings as $booking)
+          <div class="modal fade" id="appModal{{ $booking->id }}" tabindex="-1" aria-labelledby="appModalLabel{{ $booking->id }}" aria-hidden="true">
+              <div class="modal-dialog modal-sm modal-dialog-centered">
+                  <div class="modal-content">
+                      <div class="modal-body rounded">
+                          <div class="d-flex align-items-center justify-content-center mb-2 mt-3">
+                              <div class="rea-app-img">
+                                  <img src="{{asset('realtor-dashboard/asset/img/user-img.png')}}"  alt="icon">
+                              </div>
+                          </div>
+                          <h3 class="text-center mb-4">{{ "$booking->first_name $booking->last_name" }}</h3>
+                              <a href="{{ route('agency.message-inquiry', $booking->id) }}" class="new-discussion-btn btn-success d-block w-100 mb-3">View</a>
+                              <button data-bs-dismiss="modal" class="new-discussion-btn w-100 d-block outline-success text-dark">Back</button>
+                      </div>
                   </div>
-             </div>
-        </div>
-    </div>
+              </div>
+          </div>
+      @endforeach
+    @endif
    
 </div>
